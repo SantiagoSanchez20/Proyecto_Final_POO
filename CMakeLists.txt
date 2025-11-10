@@ -4,9 +4,17 @@ project(Clase18POO)
 set(CMAKE_CXX_STANDARD 20)
 
 add_executable(Clase18POO main.cpp
-        Personaje.cpp
-        Personaje.h
-        Mago.cpp
-        Mago.h
-        Guerrero.cpp
-        Guerrero.h)
+        Model/Personaje.cpp
+        Model/Personaje.h
+        View/Consola.cpp
+        View/Consola.h
+        Model/Arma.cpp
+        Model/Arma.h
+        Model/EspadaBruma.cpp
+        Model/EspadaBruma.h
+        Model/DagaVelo.cpp
+        Model/DagaVelo.h
+        Model/Player.cpp
+        Model/Player.h
+        Model/Inventario.cpp
+        Model/Inventario.h)

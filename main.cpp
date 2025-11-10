@@ -1,14 +1,19 @@
 #include <iostream>
 #include <vector>
-#include "Personaje.h"
+#include "Model/Personaje.h"
 #include "Mago.h"
-#include "Guerrero.h"
-
+#include "Model/Guerrero.h"
+#include <iostream>
+#include <locale.h>
+#include <windows.h>
 /**
  * @file main.cpp
  * @brief Programa principal para demostrar Herencia y Polimorfismo.
  */
 int main() {
+
+   SetConsoleOutputCP(CP_UTF8);//Este emula la consola de windows para que los cout funciones correctamente
+    SetConsoleCP(CP_UTF8); //Para que los Cin funcionen correctamente
     std::cout << "===== DEMOSTRACIoN DE HERENCIA Y POLIMORFISMO =====" << std::endl;
 
     // 1. Creamos un vector de punteros a la clase BASE (Personaje*).
