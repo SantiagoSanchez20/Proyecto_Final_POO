@@ -17,4 +17,8 @@ add_executable(Clase18POO main.cpp
         Model/Player.cpp
         Model/Player.h
         Model/Inventario.cpp
-        Model/Inventario.h)
+        Model/Inventario.h
+        Model/Item.cpp
+        Model/Item.h
+        Model/Pocion.cpp
+        Model/Pocion.h)

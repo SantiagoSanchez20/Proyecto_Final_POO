@@ -4,13 +4,17 @@
 
 #ifndef CLASE18POO_PLAYER_H
 #define CLASE18POO_PLAYER_H
-
+#include "Inventario.h"
+#include "Arma.h"
 
 class Player
 {
 private:
-    int hp = 100;
-    int ataqueBase = 8;
+    int hp;
+    int ataqueBase;
+    Inventario inventario; //Inventario del jugador
+    Arma armaEquipada;
+
 
 };
 
