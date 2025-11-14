@@ -21,4 +21,7 @@ add_executable(Clase18POO main.cpp
         Model/Item.cpp
         Model/Item.h
         Model/Pocion.cpp
-        Model/Pocion.h)
+        Model/Pocion.h
+        Model/Maelor.cpp
+        Model/Maelor.h
+)

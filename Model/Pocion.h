@@ -5,7 +5,7 @@
 #ifndef CLASE18POO_POCION_H
 #define CLASE18POO_POCION_H
 #include "Item.h"
-
+#include <iostream>
 class Pocion : public Item
 {
 private:

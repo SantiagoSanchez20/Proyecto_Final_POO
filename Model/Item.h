@@ -6,6 +6,7 @@
 #define CLASE18POO_ITEM_H
 #include <string>
 #include "Player.h"
+#include <iostream>
 class Item
 {
     protected:
@@ -22,8 +23,8 @@ public:
     //Usamos los getters(para poder leer los datos protegidos de esta clase).
 
 
-    std::string getNombre(){return nombre;}
-    std::string getDescripcion(){return descripcion;};
+    std::string getNombre();
+    std::string getDescripcion();
 
 
 
