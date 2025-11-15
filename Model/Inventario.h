@@ -6,6 +6,8 @@
 #define CLASE18POO_INVENTARIO_H
 #include <list>
 #include "Item.h"
+
+
 class Inventario
 {
 

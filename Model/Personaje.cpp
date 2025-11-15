@@ -1,25 +1,23 @@
 #include "Personaje.h"
 #include <iostream>
 
-/**
- * @file Personaje.cpp
- * @brief IMPLEMENTACIÓN de los metodos de la clase base Personaje.
- */
 
-Personaje::Personaje(std::string nombre) : nombre(nombre), vida(100) {
-    std::cout << "Ha nacido un nuevo personaje: " << this->nombre << std::endl;
+//Creamos el constructor
+
+Personaje::Personaje(std::string &nombre, int vida) : nombre(nombre), vida(vida) {
 }
 
-// Implementación del ataque generico para un Personaje base.
-void Personaje::atacar() const {
-    std::cout << this->nombre << " realiza un ataque generico." << std::endl;
-}
 
-void Personaje::recibirDanio(int danio) {
-    this->vida -= danio;
-    std::cout << this->nombre << " recibe " << danio << " de danno. Vida restante: " << this->vida << std::endl;
+//Creamos el booleando
+bool Personaje::estaVivo() const {
+    return this->vida  > 0 ;
 }
 
 std::string Personaje::getNombre() const {
     return this->nombre;
+
+}
+
+int Personaje::getVida() const {
+    return this->vida;
 }

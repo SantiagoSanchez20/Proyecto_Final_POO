@@ -16,20 +16,25 @@ protected:
 
 public:
     // Constructor
-    Personaje(std::string nombre);
+    Personaje(const std::string& nombre, int vida);
 
     // Destructor virtual: CRUCIAL para el polimorfismo.
     // Asegura que se llame al destructor correcto (ej. ~Mago()) cuando
     // se hace delete a un puntero de tipo Personaje*.
     virtual ~Personaje() = default;
 
-    // Método virtual para el ataque. La palabra 'virtual' permite que las clases
-    // hijas (derivadas) proporcionen su propia implementación.
-    virtual void atacar() const;
+    //---Booleano para saber si esta vivo o no
+    bool estaVivo() const;
 
-    // Métodos comunes no virtuales.
-    void recibirDanio(int danio);
+    // Para acceder al nombre
     std::string getNombre() const;
+
+    //Para acceder a la vida actual
+    int getVida() const;
+
+    //----Metodo virtual  de recibirDano para las clases hijas
+    virtual void recibirDano(int cantidad) = 0;
+
 };
 
 #endif //PERSONAJE_H

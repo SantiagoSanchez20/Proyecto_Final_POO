@@ -5,8 +5,9 @@
 #ifndef CLASE18POO_ITEM_H
 #define CLASE18POO_ITEM_H
 #include <string>
-#include "Player.h"
+
 #include <iostream>
+class Player;
 class Item
 {
     protected:
@@ -15,16 +16,20 @@ class Item
 public:
 
     //constructor para item
-    Item(std::string nombre, std::string descripcion): nombre(nombre), descripcion(descripcion) {}
-    virtual ~Item() {}
+    Item(const std::string& nombre, const std::string& descripcion);
+
+    virtual ~Item() = default;
+
+    //Metodo virtual para puro, obliga que las clases hijas creen su propio implementación
+
     virtual void usar(Player* jugador) = 0;
 
 
     //Usamos los getters(para poder leer los datos protegidos de esta clase).
 
 
-    std::string getNombre();
-    std::string getDescripcion();
+    std::string getNombre() const ;
+    std::string getDescripcion() const ;
 
 
 
