@@ -1,36 +1,12 @@
 //
-// Created by duque on 10/11/2025.
+// Created by ssanc on 15/11/2025.
 //
 
 #ifndef CLASE18POO_PLAYER_H
 #define CLASE18POO_PLAYER_H
-#include "Inventario.h"
-#include "Arma.h"
-#include "Item.h"
-
-class Enemigo;
-class Player
-{
-private:
-    int hp;
-    int ataqueBase;
-    Inventario inventario; //Inventario del jugador
-    Arma armaEquipada;
 
 
-public:
-
-    //Constructor
-    Player();
-
-    //Metodos para Player.cpp
-    void atacar(Enemigo* enemigo);
-    void usarItem(Item* item);
-    void mover();
-
-
-
-
+class Player {
 };
 
 
