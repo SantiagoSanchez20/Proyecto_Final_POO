@@ -12,49 +12,35 @@ Inventario::Inventario()
 }
 //Destructor para borrar el inventario
 
-Inventario::~Inventario()
-{
-    for (Item* item : items)
-    {
-        std::cout << "Borrando Inventario....." << std::endl;
-        delete item; //Aqui esta eliminando la memoria, sirve cuando el usuario se muere.
+bool Inventario::agregarItem(Item* item) {
+    // Por ahora, asumimos capacidad infinita
+    if (item != nullptr) {
+        this->items.push_back(item);
+        return true;
     }
-    items.clear();
+    return false;
 }
 
-//Creamos la funcion de agregar item
-
-void Inventario::AgregarItem(Item* item)
-{
-    items.push_back(item);
-    std::cout << "Has agregado: " << item->getNombre()<<std::endl;
-}
-
-void Inventario::removerItem(Item* item)
-{
-    //Usamos el remove para borrar el item si el jugador desea eliminarlo
-    items.remove(item);
-    std::cout << "Has removido: " << item->getNombre()<<std::endl;
-}
-void Inventario::mostrarInventario()
-{
-    std::cout << "----Inventario----" << std::endl;
-
-    if (items.empty())
-    {
-        std::cout << " (Vacio)" << std::endl;
-
-    } else
-    {
-        int i = 1;
-        for (Item* item : items)
-        {
-            std::cout << i << ". " << item->getNombre() << std::endl;
-            i++;
+Item* Inventario::buscarItem(const std::string& nombre) {
+    for (Item* item : this->items) {
+        if (item->getNombre() == nombre) {
+            return item;
         }
     }
-    std::cout <<"---------------------\n" << std::endl;
+    return nullptr; // No se encontró
+}
 
+void Inventario::mostrarItems() const {
+    if (this->items.empty()) {
+        std::cout << "[Inventario] Esta vacio." << std::endl;
+        return;
+    }
+
+    std::cout << "--- INVENTARIO ---" << std::endl;
+    for (const Item* item : this->items) {
+        std::cout << "- " << item->getNombre() << " (" << item->getDescripcion() << ")" << std::endl;
+    }
+    std::cout << "------------------" << std::endl;
 }
 
 

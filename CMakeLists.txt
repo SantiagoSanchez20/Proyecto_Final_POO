@@ -24,4 +24,18 @@ add_executable(Clase18POO main.cpp
         Model/Player.h
         Model/Enemigo.cpp
         Model/Enemigo.h
+        Model/GuardianDeLumen.cpp
+        Model/GuardianDeLumen.h
+        Model/SoldadoCorrupto.cpp
+        Model/SoldadoCorrupto.h
+        Model/GuardianPesado.cpp
+        Model/GuardianPesado.h
+        Model/Ladron.cpp
+        Model/Ladron.h
+        Model/NPC.cpp
+        Model/NPC.h
+        Model/Maelor.cpp
+        Model/Maelor.h
+        Model/Iria.cpp
+        Model/Iria.h
 )

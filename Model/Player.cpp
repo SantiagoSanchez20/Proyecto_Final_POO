@@ -64,6 +64,8 @@ void Player::atacar(Enemigo* objetivo) {
 
 //Implementamos el mover al player.
 void Player::mover() {
+
+    // Implementar en esta funcion de player  cuando se este en salas
     std::cout << "[jugador]" << this->nombre << " se mueve..." << std::endl;
 }
 

@@ -7,28 +7,24 @@
 #include <iostream>
 #include <ostream>
 
-#include "Item.h"
+
 #include "Player.h"
 
 
-//Inicializamos el constructor.
-
-Pocion::Pocion(std::string nombrePocion,
-    std::string descripPocion,
-    int cura) : Item(nombrePocion,
-        descripPocion),
-hpCurado(20){
-    std::cout << "Pocion cread(Constructor)" << std::endl;
+// --- Constructor ---
+Pocion::Pocion(const std::string& nombre, const std::string& descripcion, int hpCurado)
+    // 1. Llama al constructor de Item
+    : Item(nombre, descripcion),
+    // 2. Inicializa sus propios atributos
+      hpCurado(hpCurado)
+{
+    // Constructor
 }
 //--------Void de usar de la pocion---------
 
 
 void::Pocion::usar(Player* jugador)// Se llama la clase de player para que se aplique la funcion de la pocion
 {
-    std::cout << "Se ha usado la pocion"<< this->nombre << " .";
-    std::cout << " Recuperas: " << this->hpCurado <<" HP." <<std::endl;
-
-
-    //Falta implementacion de la funcion curar en Player.cpp
-    //jugador->curar(this->hpCurado);
+    std::cout << "Bebes la " << this->nombre << "." << std::endl;
+    jugador->curar(this->hpCurado);
 }

@@ -14,14 +14,14 @@ class Enemigo : public Personaje{
     int experiencia;
 
     //Constructor para enemigo
-    Enemigo(const std::string& nombre, int vida, int ataque, int experiancia);
+    Enemigo(const std::string& nombre, int vida, int ataque, int experiencia);
 
     //Metodo atacar para el jugador
 
-    void atacar(Player* objetivo);
+    virtual void atacar(Player* objetivo) ;
 
     //Virtual para sobreescribir recibiDaño
-    void recibirDano(int cantidad) override;
+    virtual void recibirDano(int cantidad) override;
 
 
 

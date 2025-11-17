@@ -40,6 +40,9 @@ void Enemigo::recibirDano(int cantidad) {
 void Enemigo::atacar(Player* objetivo) {
     // Comprobaciones de estado
     if (!this->estaVivo()) {
+
+        //Implementar aqui el nombre del cada jefe si hay en una sala
+
         std::cout << "[Enemigo] " << this->nombre << " no puede atacar, esta muerto." << std::endl;
         return;
     }
