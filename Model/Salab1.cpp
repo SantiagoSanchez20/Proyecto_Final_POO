@@ -1,5 +1,5 @@
-#include "SalaB1.h"
-#include "GameManager.h"
+#include "Salab1.h"
+#include "../Controller/GameManager.h"
 #include "Player.h"
 #include "Maelor.h"
 #include "SoldadoCorrupto.h"

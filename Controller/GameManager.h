@@ -5,7 +5,6 @@
 #include <vector>
 #include <algorithm>
 #include <cctype>
-
 #include "Sala.h"
 #include "Personaje.h"
 

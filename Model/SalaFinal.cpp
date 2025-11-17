@@ -1,6 +1,6 @@
 
 #include "SalaFinal.h"
-#include "GameManager.h"
+#include "../Controller/GameManager.h"
 #include "Player.h"
 #include "Enemigo.h"
 #include "GuardianDeLumen.h"

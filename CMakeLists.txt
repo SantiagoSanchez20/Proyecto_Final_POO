@@ -24,20 +24,20 @@ add_executable(Clase18POO main.cpp
         Model/Pocion.h
         Model/Maelor.cpp
         Model/Maelor.h
-        salas/SalaInicio.cpp
-        salas/SalaInicio.h
-        salas/Salab1.cpp
-        salas/Salab1.h
-        salas/SalaB2.cpp
-        salas/SalaB2.h
-        salas/SalaC1.cpp
-        salas/SalaC1.h
-        salas/SalaC2.cpp
-        salas/SalaC2.h
-        salas/SalaFinal.cpp
-        salas/SalaFinal.h
-        salas/GameManager.cpp
-        salas/GameManager.h
-        salas/Sala.cpp
-        salas/Sala.h
+        Model/SalaInicio.cpp
+        Model/SalaInicio.h
+        Model/Salab1.cpp
+        Model/Salab1.h
+        Model/SalaB2.cpp
+        Model/SalaB2.h
+        Model/SalaC1.cpp
+        Model/SalaC1.h
+        Model/SalaC2.cpp
+        Model/SalaC2.h
+        Model/SalaFinal.cpp
+        Model/SalaFinal.h
+        Controller/GameManager.cpp
+        Controller/GameManager.h
+        Model/Sala.cpp
+        Model/Sala.h
 )

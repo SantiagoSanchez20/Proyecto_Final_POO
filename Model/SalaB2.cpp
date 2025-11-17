@@ -1,5 +1,5 @@
 #include "SalaB2.h"
-#include "GameManager.h"
+#include "../Controller/GameManager.h"
 #include "Player.h"
 #include "Enemigo.h" // Para buscar al Guardia
 

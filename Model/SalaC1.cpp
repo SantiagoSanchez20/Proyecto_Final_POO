@@ -1,7 +1,13 @@
 #include "SalaC1.h"
-#include "GameManager.h"
+#include "../Controller/GameManager.h"
 #include "Player.h"
-#include "Trampa.h" // (Clase de Persona B)
+
+
+
+//Falta implementacion de trampa, .h y cpp
+
+
+
 
 SalaC1::SalaC1() : Sala(
     "C1",

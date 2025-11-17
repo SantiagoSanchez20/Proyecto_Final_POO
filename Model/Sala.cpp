@@ -1,5 +1,4 @@
 #include "Sala.h"
-#include "GameManager.h"
 #include "Player.h"
 #include "Inventario.h"
 
