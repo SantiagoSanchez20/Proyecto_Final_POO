@@ -15,6 +15,56 @@ armaEquipada(nullptr){
 
 }
 
+
+//Implementacion de añadir buff al jugador
+void Player::agregarBuff(const Buff &buff) {
+    this->buffsActivos.push_back(buff);
+    std::cout << "[Jugador] Sientes un nuevo poder: " << buff.nombre
+    << " (+" << buff.aumentoAtaque << " Atk" << buff.turnosRestantes << " turnos"  << std::endl;
+}
+
+//Implementacion de actualizar el buff
+
+void Player::actualizarBuff() {
+
+    //Usamos un iterador 'while' por que es mas seguro
+    //al borrrar elementos de un vector mientras se itera.
+
+    auto it = this->buffsActivos.begin();
+    while (it != this->buffsActivos.end()) {
+        //Reducimos la duracion de turno por cada vez que se ataca teniendo el buff activo
+        it->turnosRestantes--;
+
+        //Comprabacion si el buff expiro en la turnos correspondientes
+        if (it->turnosRestantes <= 0) {
+            std::cout << "[Jugador] El efecto "
+            << it->nombre << " se ha disipado." << std::endl;
+
+            //Borramos el buff del vector
+            //'erase' devuelve el iterador al "siguiente" elemento
+
+            it = this->buffsActivos.erase(it);
+
+        }else {
+
+            //Sigue activo si no ha expirado la cantidad de turno que lleva el buff por encima
+            it++;
+        }
+
+    }
+}
+
+int Player::getDanoAtaqueTotal() const {
+    int total = this->ataqueBase;
+
+    for (const Buff& buff : this->buffsActivos) {
+        total += buff.aumentoAtaque;
+    }
+    return total;
+}
+
+
+
 //Implementacion de la Herencia recibiDano
 
 void Player::recibirDano(int cantidad) {
@@ -46,7 +96,7 @@ void Player::atacar(Enemigo* objetivo) {
         return;
     }
 
-    int danoTotal = this->ataqueBase;
+    int danoTotal = this->getDanoAtaqueTotal();
     std::string nombreArma = "sus punos";
 
     // 'armaEquipada->danioAdicional' funcionará

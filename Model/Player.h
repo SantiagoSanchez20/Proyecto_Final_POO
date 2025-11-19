@@ -7,7 +7,9 @@
 #include "Personaje.h"
 #include "Inventario.h"
 #include "Item.h"
+#include "Buff.h"
 #include <iostream>
+#include <vector>
 
 
 //Declaramos clases adelantadas para que decirle al copilador que estas clases existen en el trabajo
@@ -15,7 +17,6 @@ class Enemigo;
 class Arma;
 
 class Player : public Personaje {
-
 private:
     // --- Atributos Privados ---
     Arma* armaEquipada; // Puntero al arma. 'nullptr' significa desarmado.
@@ -23,13 +24,25 @@ private:
     // Guardamos el HP máximo para la lógica de curación
     const int hpMax;
 
-    public:
+public:
     int  ataqueBase;
     Inventario Inventario; //Inventario
 
-//Contructor
+    //Vector para guardar los buff activos
+    std::vector<Buff> buffsActivos;
+
+    //Contructor
 
     Player();
+
+    //Añadims un metodo agregarBuff cuando se encuentre con la alma iria
+    void agregarBuff(const Buff& buff);
+
+    //Actualiza la Duracion de todos los buffs, hay que llamarlo por el gamemanager al final de cada turno.
+    void actualizarBuff();
+
+    //Calcula el daño totla, sumando ataque base + buff
+    int getDanoAtaqueTotal() const;
 
     //Metodos de interaccion del sistema
 

@@ -38,4 +38,6 @@ add_executable(Clase18POO main.cpp
         Model/Maelor.h
         Model/Iria.cpp
         Model/Iria.h
+        Model/Buff.cpp
+        Model/Buff.h
 )
