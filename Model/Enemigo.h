@@ -14,7 +14,7 @@ class Enemigo : public Personaje{
     int experiencia;
 
     //Constructor para enemigo
-    Enemigo(const std::string& nombre, int vida, int ataque, int experiencia);
+    Enemigo(const std::string& nombre, int hp, int ataque, int experiencia);
 
     //Metodo atacar para el jugador
 

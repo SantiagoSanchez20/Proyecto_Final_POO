@@ -18,14 +18,14 @@ Enemigo::Enemigo(const std::string& nombre, int hp, int ataque, int experiencia)
 //Implementamos la herencia de recibirDano
 
 void Enemigo::recibirDano(int cantidad) {
-    this->vida -= cantidad;
+    this->hp -= cantidad;
 
-    if (this->vida < 0) {
-        this->vida = 0;
+    if (this->hp < 0) {
+        this->hp = 0;
     }
 
     std::cout << "[Enemigo] " << this->nombre << " recibe " << cantidad
-        << " de dano. Vida restante: " << this-> vida << std::endl;
+        << " de dano. Vida restante: " << this-> hp << std::endl;
 
     //Implementamo un if para saber si esta vivo
     if (!this->estaVivo()) {

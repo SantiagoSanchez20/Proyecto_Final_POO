@@ -15,7 +15,7 @@ void GuardianDeLumen::cambiarFase() {
         return;
     }
 
-        float hpPorcent = (float)this->vida / this->hpMax;
+        float hpPorcent = (float)this->hp / this->hpMax;
 
 
     //Fase 3  Ataques  HP(HP( 1% a 39%) Ataques mas fuertes,mas daño
@@ -39,12 +39,12 @@ void GuardianDeLumen::cambiarFase() {
 }
 
 void GuardianDeLumen::recibirDano(int cantidad) {
-    this-> vida -= cantidad;
-    if (this->vida < 0 ) {
-        this->vida = 0;
+    this-> hp -= cantidad;
+    if (this->hp < 0 ) {
+        this->hp = 0;
     }
     std::cout << "El " << this->nombre << " recibe " << cantidad << "de dano" <<
-        "vida restante:" << this-> vida << "/" << this->hpMax << std::endl;
+        "vida restante:" << this-> hp << "/" << this->hpMax << std::endl;
 
     //Comprobamos el cambio de fase
 
