@@ -12,7 +12,7 @@ class GuardianDeLumen : public Enemigo{
 private:
     int fase;
     int hpMax;
-
+//dasda
 //Creamos clases privadas para que no haya ningun problema al momento de confusion al hacer
 //llamado de las funciones de las fases, dependiendo la vida que tiene el jefe
     void cambiarFase();

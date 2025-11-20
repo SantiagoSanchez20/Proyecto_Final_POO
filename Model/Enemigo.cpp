@@ -3,6 +3,7 @@
 //
 
 #include "Enemigo.h"
+//enemigo.cpp
 
 // --- Constructor ---
 Enemigo::Enemigo(const std::string& nombre, int hp, int ataque, int experiencia)
