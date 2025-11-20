@@ -11,6 +11,7 @@
 class Player;
 class Enemigo;
 class Item;
+class Sala;
 
 class GameManager {
 public:

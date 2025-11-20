@@ -5,6 +5,7 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include <map>
 #include "../Controller/GameManager.h"
 
 class Player;
@@ -14,6 +15,12 @@ class GameManager;
 
 class Sala {
 public:
+    // Variables necesarias para que funcione el juego
+    std::string descripcion;
+    std::string nombre;
+    std::map<std::string, std::string> salidas;
+    std::vector<Personaje*> personajesEnSala;
+    std::vector<Item*> itemsEnSala;
 
     virtual ~Sala() {}
 
@@ -30,8 +37,6 @@ public:
     virtual void manejarTurno(GameManager* game, Player* jugador);
 
 protected:
-    std::string descripcion;
-    std::string nombre;
     Sala(std::string _nombre, std::string _desc)
         : nombre(_nombre), descripcion(_desc) {}
     char presentarOpcionesYLeerInput(const std::vector<std::string>& opciones);

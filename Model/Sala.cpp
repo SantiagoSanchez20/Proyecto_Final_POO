@@ -10,8 +10,6 @@ void Sala::manejarTurno(GameManager* game, Player* jugador) {
     char opcionActual = 'a';
 
     for (auto const& [textoOpcion, idSala] : this->salidas) {
-        if (idSala == game->getCaminoBloqueado()) continue;
-
         opciones.push_back(textoOpcion);
         mapaSalidas[opcionActual] = idSala;
         opcionActual++;

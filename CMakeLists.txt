@@ -40,4 +40,6 @@ add_executable(Clase18POO main.cpp
         Controller/GameManager.h
         Model/Sala.cpp
         Model/Sala.h
+        Model/Trampa.cpp
+        Model/Trampa.h
 )
