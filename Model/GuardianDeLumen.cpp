@@ -9,7 +9,7 @@ GuardianDeLumen::GuardianDeLumen() : Enemigo("Guardian de Lumen", 50 , 12, 10),
 fase(1), hpMax(100)  {
     std::cout << " El "<<this->nombre << "Ha aparecido..... Derrotalo! " << std::endl;
 }
-//guardian de lumen
+//guardian de lumenddddd
 void GuardianDeLumen::cambiarFase() {
     if (!this->estaVivo()) {
         return;
