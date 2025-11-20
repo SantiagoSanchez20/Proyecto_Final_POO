@@ -12,11 +12,11 @@ class Personaje {
 protected:
     // Protected: Accesible para esta clase y para las clases que hereden de ella.
     std::string nombre;
-    int vida;
+    int hp;
 
 public:
     // Constructor
-    Personaje(const std::string& nombre, int vida);
+    Personaje(const std::string& nombre, int hp);
 
     // Destructor virtual: CRUCIAL para el polimorfismo.
     // Asegura que se llame al destructor correcto (ej. ~Mago()) cuando
@@ -30,7 +30,7 @@ public:
     std::string getNombre() const;
 
     //Para acceder a la vida actual
-    int getVida() const;
+    int getHP() const;
 
     //----Metodo virtual  de recibirDano para las clases hijas
     virtual void recibirDano(int cantidad) = 0;

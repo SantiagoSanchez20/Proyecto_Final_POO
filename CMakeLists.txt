@@ -10,8 +10,8 @@ add_executable(Clase18POO main.cpp
         View/Consola.h
         Model/Arma.cpp
         Model/Arma.h
-        Model/EspadaBruma.cpp
-        Model/EspadaBruma.h
+        Model/EspadaDeBruma.cpp
+        Model/EspadaDeBruma.h
         Model/DagaVelo.cpp
         Model/DagaVelo.h
         Model/Inventario.cpp

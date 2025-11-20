@@ -6,7 +6,7 @@
 #include "Enemigo.h"
 #include "Arma.h"
 #include "Item.h"
-
+#include <cstdlib> // Se incluye esta libreria para que se una la funcion Rand()
 Player::Player()
 : Personaje("Jugador",100),
 ataqueBase(8),
@@ -69,13 +69,13 @@ int Player::getDanoAtaqueTotal() const {
 
 void Player::recibirDano(int cantidad) {
 
-    this->vida -=cantidad;
+    this->hp -=cantidad;
 
-    if (this->vida < 0) {
-        this->vida = 0; //Colocamos esto para evitar que haya vida negativa
+    if (this->hp < 0) {
+        this->hp = 0; //Colocamos esto para evitar que haya vida negativa
     }
     std::cout << "[Jugador]"<< this->nombre << " recibe "<< cantidad <<
-        "de daño. vida restante: " << this->vida << std::endl;
+        "de daño. vida restante: " << this->hp << std::endl;
 
     if (!this->estaVivo()) {
         std::cout << "[Jugador]"<< this->nombre << " ha sido derrotado."<<std::endl;
@@ -95,21 +95,46 @@ void Player::atacar(Enemigo* objetivo) {
         std::cout << "[Jugador] El objetivo " << objetivo->getNombre() << " ya esta derrotado." << std::endl;
         return;
     }
-
+    //Calcular daño ( Base + buff )
     int danoTotal = this->getDanoAtaqueTotal();
     std::string nombreArma = "sus punos";
 
-    // 'armaEquipada->danioAdicional' funcionará
-    // gracias al #include "Arma.h".
+    bool esCritico = false;
+    bool aturde = false;
+
+    // Verifica el arma y efectos
     if (this->armaEquipada != nullptr) {
         danoTotal += this->armaEquipada->danioAdicional;
-        nombreArma = "su " + this->armaEquipada->getNombre(); // Asumiendo que Arma hereda getNombre de Item
+        nombreArma =  "su" + this->armaEquipada->getNombre();
+        //Se usa Rand para genera numero del 0 - 100, esta funcion que se implementa de la libreria
+
+        //Probabilidad de critico
+        if (rand() % 100 < this->armaEquipada->chanceCritico) {
+            esCritico = true;
+            danoTotal *= 2;
+        }
+
+        if (rand() % 100 < this->armaEquipada->chanceAturdir) {
+            aturde = true;
+        }
+
     }
 
     std::cout << "[Jugador] " << this->nombre << " ataca a " << objetivo->getNombre()
-        << " con " << nombreArma << " e inflige " << danoTotal << " de dano." << std::endl;
+          << " con " << nombreArma;
 
+    if (esCritico) std::cout << "¡GOLPE CRITICO!";
+    std::cout<< "inflige " << danoTotal << " de dano." << std::endl;
+
+    if (aturde) {
+        std::cout << "[Efecto] ¡" << objetivo->getNombre() << " ha quedado ATURDIDO!" << std::endl;
+
+    }
     objetivo->recibirDano(danoTotal);
+
+
+
+
 }
 
 //Implementamos el mover al player.
@@ -118,7 +143,7 @@ void Player::mover() {
     // Implementar en esta funcion de player  cuando se este en salas
     std::cout << "[jugador]" << this->nombre << " se mueve..." << std::endl;
 }
-
+//----Gestion de Estado----
 void Player::equiparArma(Arma* nuevaArma) {
     this->armaEquipada = nuevaArma;
     if (nuevaArma != nullptr) {
@@ -133,13 +158,13 @@ Arma* Player::getArmaEquipada() const {
 }
 
 void Player::curar(int cantidad) {
-    this->vida += cantidad;
-    if (this-> vida > this->hpMax) {
-        this->vida = this->hpMax;
+    this->hp += cantidad;
+    if (this-> hp > this->hpMax) {
+        this->hp = this->hpMax;
 
     }
     std::cout << "[Jugador] " << this->nombre << " se cura " << cantidad
-        << " de vida. Vida actual: " << this->vida << std::endl;
+        << " de vida. Vida actual: " << this->hp << std::endl;
 }
 
 

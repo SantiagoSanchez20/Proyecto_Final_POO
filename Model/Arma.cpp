@@ -9,14 +9,15 @@
 Arma::Arma(const std::string& nombre,
            const std::string& descripcion,
            int danioAdicional,
-           const std::string& efectoEspecial)
-    // 1. Llama al constructor de la clase base (Item)
+           const std::string& efectoEspecial,
+           int chanceCritico,
+           int chanceAturdir)
     : Item(nombre, descripcion),
-    // 2. Inicializa los atributos propios de Arma
       danioAdicional(danioAdicional),
-      efectoEspecial(efectoEspecial)
+      efectoEspecial(efectoEspecial),
+      chanceCritico(chanceCritico),
+      chanceAturdir(chanceAturdir)
 {
-
 }
 
 // --- Implementación de la Herencia ---

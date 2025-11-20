@@ -4,13 +4,16 @@
 
 //Creamos el constructor
 
-Personaje::Personaje(std::string &nombre, int vida) : nombre(nombre), vida(vida) {
+Personaje::Personaje(const std::string& nombre, int hp)
+    : nombre(nombre), hp(hp)
+{
+
 }
 
 
 //Creamos el booleando
 bool Personaje::estaVivo() const {
-    return this->vida  > 0 ;
+    return this->hp  > 0 ;
 }
 
 std::string Personaje::getNombre() const {
@@ -18,6 +21,6 @@ std::string Personaje::getNombre() const {
 
 }
 
-int Personaje::getVida() const {
-    return this->vida;
+int Personaje::getHP() const {
+    return this->hp;
 }

@@ -8,12 +8,7 @@
 
 class DagaVelo: public Arma
 {
-    DagaVelo()
-    {
-        nombre = "Espada de Velo";
-        danioAdicional = 10;
-        efectoEspecial = "+15% critico";
-    }
+   DagaVelo();
 };
 
 
