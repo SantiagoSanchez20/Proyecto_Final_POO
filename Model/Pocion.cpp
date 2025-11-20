@@ -1,6 +1,3 @@
-//
-// Created by duque on 11/11/2025.
-//
 
 #include "Pocion.h"
 

@@ -1,7 +1,3 @@
-//
-// Created by duque on 11/11/2025.
-//
-
 #ifndef CLASE18POO_POCION_H
 #define CLASE18POO_POCION_H
 #include "Item.h"
