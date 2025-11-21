@@ -1,7 +1,5 @@
 #include "Sala.h"
-// --- SOLUCIÓN: Agregamos el include para la definición completa de GameManager
 #include "../Controller/GameManager.h"
-// --------------------------------------------------------------------------
 #include "Player.h"
 #include "Inventario.h"
 #include <limits>
@@ -40,7 +38,7 @@ void Sala::manejarTurno(GameManager* game, Player* jugador) {
         std::cin.get();
     }
     else if (eleccion == opcionSalir) {
-        // CORREGIDO: Ahora el compilador conoce terminarJuego()
+        //
         game->terminarJuego(false);
     }
     else {

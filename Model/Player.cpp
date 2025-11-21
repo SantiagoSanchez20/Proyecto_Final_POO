@@ -2,7 +2,7 @@
 #include "Enemigo.h"
 #include "Arma.h"
 #include "Item.h"
-#include "Inventario.h" // <--- ¡IMPORTANTE! Necesario para crear el inventario
+#include "Inventario.h" //
 #include <cstdlib> // Se incluye esta libreria para que se una la funcion Rand()
 
 Player::Player()
@@ -121,7 +121,7 @@ void Player::atacar(Enemigo* objetivo) {
         std::cout << " ¡GOLPE CRITICO!";
     }
 
-    std::cout << " e inflige " << danoTotal << " de dano." << std::endl;
+    std::cout << " e inflige " << danoTotal << " de daño." << std::endl;
 
     if (aturde) {
         std::cout << "[Efecto] ¡" << objetivo->getNombre() << " ha quedado ATURDIDO por el golpe!" << std::endl;
