@@ -1,5 +1,8 @@
 #include "Item.h"
 // Implementación del constructor
+/**Hecho por Santiago Sanchez y
+ *Alejandro Botero
+ */
 Item::Item(const std::string& nombre, const std::string& descripcion)
     : nombre(nombre), descripcion(descripcion) {
     // Constructor

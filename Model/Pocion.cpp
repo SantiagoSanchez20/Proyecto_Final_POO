@@ -6,6 +6,9 @@
 
 
 #include "Player.h"
+/**Hecho por Santiago Sanchez y
+ *Alejandro Botero
+ */
 // --- Constructor ---
 Pocion::Pocion(const std::string& nombre, const std::string& descripcion, int hpCurado)
     // 1. Llama al constructor de Item

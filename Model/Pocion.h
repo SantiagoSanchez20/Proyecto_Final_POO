@@ -3,6 +3,9 @@
 #include "Item.h"
 
 #include <iostream>
+/**Hecho por Santiago Sanchez y
+ *Alejandro Botero
+ */
 class Pocion : public Item
 {
 private:

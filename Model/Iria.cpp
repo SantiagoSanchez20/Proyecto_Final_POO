@@ -2,7 +2,9 @@
 #include "Buff.h"
 #include "Iria.h"
 
-
+/**Hecho por Santiago Sanchez y
+ *Alejandro Botero
+ */
 Iria::Iria(): NPC("Iria", "Escucha el viento, te guiara a la verdad."){
 
 }

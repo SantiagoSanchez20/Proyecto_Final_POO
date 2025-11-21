@@ -5,7 +5,9 @@
 #include "Enemigo.h" // Necesario para findPersonaje
 #include <iostream>
 #include <limits>
-
+/**Hecho por Santiago Sanchez y
+ *Alejandro Botero
+ */
 SalaC2::SalaC2() : Sala(
     "C2",
     "Camara del Acolito. Un ladron esta saqueando un cuerpo."

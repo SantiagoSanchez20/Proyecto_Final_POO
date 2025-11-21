@@ -1,13 +1,17 @@
 #ifndef CLASE18POO_PLAYER_H
 #define CLASE18POO_PLAYER_H
-
+/**Hecho por Santiago Sanchez y
+ *Alejandro Botero
+ */
 #include "Personaje.h"
 #include "Inventario.h"
 #include "Item.h"
 #include "Buff.h"
 #include <iostream>
 #include <vector>
-
+/**Hecho por Santiago Sanchez y
+ *Alejandro Botero
+ */
 // Declaramos clases adelantadas
 class Enemigo;
 class Arma;

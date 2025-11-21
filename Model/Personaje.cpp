@@ -1,5 +1,9 @@
 #include "Personaje.h"
 #include <iostream>
+
+/**Hecho por Santiago Sanchez y
+ *Alejandro Botero
+ */
 //Creamos el constructor
 Personaje::Personaje(const std::string& nombre, int hp)
     : nombre(nombre), hp(hp)

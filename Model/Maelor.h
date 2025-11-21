@@ -1,7 +1,9 @@
 #ifndef CLASE18POO_MAELOR_H
 #define CLASE18POO_MAELOR_H
 #include "NPC.h"
-
+/**Hecho por Santiago Sanchez y
+ *Alejandro Botero
+ */
 class Maelor : public NPC{
 public:
     Maelor();

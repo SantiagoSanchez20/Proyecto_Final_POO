@@ -4,10 +4,12 @@
 #include "Item.h"
 #include "Inventario.h" //
 #include <cstdlib> // Se incluye esta libreria para que se una la funcion Rand()
-
+/**Hecho por Santiago Sanchez y
+ *Alejandro Botero
+ */
 Player::Player()
 : Personaje("Jugador",100),
-ataqueBase(10),
+ataqueBase(12),
 hpMax(100),
 armaEquipada(nullptr)
 {

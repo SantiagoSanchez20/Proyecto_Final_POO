@@ -3,6 +3,9 @@
 #include <string>
 
 #include <iostream>
+/**Hecho por Santiago Sanchez y
+ *Alejandro Botero
+ */
 class Player;
 class Item
 {

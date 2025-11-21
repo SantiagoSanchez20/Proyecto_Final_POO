@@ -4,6 +4,10 @@
 #include "Player.h"
 #include "Pocion.h"
 
+
+/**Hecho por Santiago Sanchez y
+ *Alejandro Botero
+ */
 Maelor::Maelor()
     :NPC("Maelor", "Saludos extraño... si estas aqui es por que andas en busca de la fruta Aureus."){
 }

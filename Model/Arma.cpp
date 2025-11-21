@@ -1,6 +1,9 @@
 #include "Arma.h"
 #include "Player.h"
 
+/**Hecho por Santiago Sanchez y
+ *Alejandro Botero
+ */
 // --- Constructor ---
 Arma::Arma(const std::string& nombre,
            const std::string& descripcion,

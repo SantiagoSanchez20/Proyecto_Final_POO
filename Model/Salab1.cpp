@@ -5,7 +5,9 @@
 #include "SoldadoCorrupto.h"
 #include <iostream>
 #include <limits>
-
+/**Hecho por Santiago Sanchez y
+ *Alejandro Botero
+ */
 SalaB1::SalaB1() : Sala(
     "B1",
     "Sala del Custodio. Un anciano monje - Maelor - bloquea el camino."

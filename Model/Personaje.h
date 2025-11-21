@@ -1,6 +1,8 @@
 #ifndef PERSONAJE_H
 #define PERSONAJE_H
-
+/**Hecho por Santiago Sanchez y
+ *Alejandro Botero
+ */
 #include <string>
 
 /**

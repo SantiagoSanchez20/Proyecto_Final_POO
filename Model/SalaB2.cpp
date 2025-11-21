@@ -4,7 +4,9 @@
 #include "Enemigo.h"
 #include <iostream>
 #include <limits>
-
+/**Hecho por Santiago Sanchez y
+ *Alejandro Botero
+ */
 SalaB2::SalaB2() : Sala(
     "B2",
     "Sala de arma misteriosa. Taller con yunques. Una espada nueva esta clavada en un bloque."

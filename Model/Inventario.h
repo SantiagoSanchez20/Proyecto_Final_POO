@@ -3,7 +3,9 @@
 
 #include <vector>
 #include <string>
-
+/**Hecho por Santiago Sanchez y
+ *Alejandro Botero
+ */
 class Item; // Declaración adelantada
 
 class Inventario {

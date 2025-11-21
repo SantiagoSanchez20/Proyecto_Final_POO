@@ -2,6 +2,10 @@
 #define CLASE18POO_IRIA_H
 #include "NPC.h"
 #include "Player.h"
+
+/**Hecho por Santiago Sanchez y
+ *Alejandro Botero
+ */
 class Iria : public NPC{
 public:
     Iria();

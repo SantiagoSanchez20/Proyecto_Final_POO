@@ -6,7 +6,9 @@
 #include <iostream>
 #include <map>
 #include <limits>
-
+/**Hecho por Santiago Sanchez y
+ *Alejandro Botero
+ */
 // Constructor
 SalaC1::SalaC1() : Sala(
     "C1",

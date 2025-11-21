@@ -1,5 +1,7 @@
 #include "Enemigo.h"
-
+/**Hecho por Santiago Sanchez y
+ *Alejandro Botero
+ */
 // --- Constructor ---
 Enemigo::Enemigo(const std::string& nombre, int hp, int ataque, int experiencia)
     // 1. Llamamos al constructor de Personaje

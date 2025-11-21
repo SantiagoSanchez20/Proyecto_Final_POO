@@ -4,7 +4,9 @@
 #include "Player.h"
 #include "Enemigo.h"
 #include <iostream>
-
+/**Hecho por Santiago Sanchez y
+ *Alejandro Botero
+ */
 // --- Constructor ---
 // Inicializa la sala final "E".
 // Los flags empiezan en false: el jefe está vivo y la fruta aun no ha sido recogida.

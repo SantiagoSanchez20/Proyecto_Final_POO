@@ -3,7 +3,9 @@
 #include <string>
 #include "Player.h"
 #include "Item.h"
-
+/**Hecho por Santiago Sanchez y
+ *Alejandro Botero
+ */
 class Arma : public Item {
 public:
     int danioAdicional;

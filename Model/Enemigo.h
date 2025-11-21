@@ -2,6 +2,10 @@
 #define CLASE18POO_ENEMIGO_H
 #include "Personaje.h"
 #include "Player.h"
+
+/**Hecho por Santiago Sanchez y
+ *Alejandro Botero
+ */
 class Enemigo : public Personaje{
     public:
 

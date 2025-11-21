@@ -2,7 +2,9 @@
 #define CLASE18POO_SALAFINAL_H
 #pragma once
 #include "Sala.h"
-
+/**Hecho por Santiago Sanchez y
+ *Alejandro Botero
+ */
 // Clase SalaFinalE: Representa el "Salón Central" (Sala E).
 // Es la última habitación del juego donde reside el Jefe Final y el objetivo (Aureus).
 class SalaFinalE : public Sala {

@@ -1,5 +1,10 @@
 #include "NPC.h"
 #include <iostream>
+
+/**Hecho por Santiago Sanchez y
+ *Alejandro Botero
+ */
+
 //Constructor
 NPC::NPC(const std::string& nombre,const std::string& dialogoInicial): Personaje(nombre,9999),
 dialogo(dialogoInicial) {

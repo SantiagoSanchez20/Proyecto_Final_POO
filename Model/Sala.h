@@ -7,7 +7,9 @@
 #include <map>
 // #include "../Controller/GameManager.h" <--- ¡ELIMINADO para romper el ciclo!
 #include "Inventario.h"
-
+/**Hecho por Santiago Sanchez y
+ *Alejandro Botero
+ */
 class Player;
 class Personaje;
 class Item;

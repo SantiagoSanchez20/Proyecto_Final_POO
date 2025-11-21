@@ -3,7 +3,9 @@
 #pragma once
 #include "Sala.h"
 #include <vector>
-
+/**Hecho por Santiago Sanchez y
+ *Alejandro Botero
+ */
 class Trampa; // Declaración adelantada para que compile rápido
 
 class SalaC1 : public Sala {

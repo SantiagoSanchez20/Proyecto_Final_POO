@@ -1,4 +1,9 @@
 #include "EspadaDeBruma.h"
+
+
+/**Hecho por Santiago Sanchez y
+ *Alejandro Botero
+ */
 EspadaDeBruma::EspadaDeBruma()
     : Arma(
         "Espada de Bruma",                 // Nombre

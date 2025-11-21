@@ -1,7 +1,9 @@
 #include "Trampa.h"
 #include "Player.h" // Necesario para poder llamar a 'recibirDano' del jugador
 #include <iostream>
-
+/**Hecho por Santiago Sanchez y
+ *Alejandro Botero
+ */
 // --- Constructor ---
 // Inicializa la trampa con un nombre (ej: "Dardos") y el daño que causará (ej: 15).
 Trampa::Trampa(std::string n, int d) : nombre(n), dano(d) {}

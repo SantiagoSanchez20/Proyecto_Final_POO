@@ -4,7 +4,9 @@
 #include "Inventario.h"
 #include <limits>
 #include <cctype>
-
+/**Hecho por Santiago Sanchez y
+ *Alejandro Botero
+ */
 void Sala::manejarTurno(GameManager* game, Player* jugador) {
 
     std::vector<std::string> opciones;

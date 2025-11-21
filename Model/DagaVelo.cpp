@@ -1,5 +1,7 @@
 #include "DagaVelo.h"
-
+/**Hecho por Santiago Sanchez y
+ *Alejandro Botero
+ */
 DagaVelo::DagaVelo() :
 Arma("Daga de Velo",
     "Una daga antigua que brilla en la prenumbra",

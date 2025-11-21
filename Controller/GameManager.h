@@ -8,6 +8,11 @@
 #include <algorithm>
 #include <cctype>
 
+
+/**Hecho por Santiago Sanchez y
+ *Alejandro Botero
+ */
+
 // --- INCLUDES CLAVE PARA LA DEFINICIÓN DE TIPOS ---
 // 1. Definición completa de Sala
 #include "../Model/Sala.h"

@@ -1,8 +1,5 @@
 #include "GameManager.h"
-
-
 #include "../View/Consola.h"
-
 #include "../Model/Arma.h"
 #include "../Model/Sala.h"
 #include "../Model/SalaInicio.h"
@@ -11,7 +8,6 @@
 #include "../Model/SalaC1.h"
 #include "../Model/SalaC2.h"
 #include "../Model/SalaFinal.h"
-
 #include "../Model/Player.h"
 #include "../Model/Inventario.h"
 #include "../Model/Pocion.h"
@@ -27,11 +23,16 @@
 #include "../Model/Enemigo.h"
 #include "../Model/Personaje.h"
 #include "../Model/CollectibleItem.h"
-
 #include <iostream>
 #include <limits>
 #include <algorithm>
 #include <cctype>
+
+/**Hecho por Santiago Sanchez y
+ *Alejandro Botero
+ */
+
+
 
 // Constructor
 GameManager::GameManager() : jugadorActual(nullptr), salaActual(nullptr),

@@ -1,6 +1,8 @@
 #ifndef TRAMPA_H
 #define TRAMPA_H
-
+/**Hecho por Santiago Sanchez y
+ *Alejandro Botero
+ */
 #pragma once
 #include <string>
 

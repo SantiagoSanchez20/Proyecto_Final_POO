@@ -1,7 +1,9 @@
 #ifndef CLASE18POO_CONSOLA_H
 #define CLASE18POO_CONSOLA_H
 #pragma once // Evita que el archivo se incluya múltiples veces y cause errores de compilación
-
+/**Hecho por Santiago Sanchez y
+ *Alejandro Botero
+ */
 #include <string>
 
 // --- Declaración Adelantada (Forward Declaration) ---

@@ -5,6 +5,12 @@
 
 // --- Constructor ---
 // Ajustamos la vida (HP) a 200 para que sea un jefe apropiado.
+
+/**Hecho por Santiago Sanchez y
+ *Alejandro Botero
+ */
+
+
 GuardianDeLumen::GuardianDeLumen() : Enemigo("Guardian de Lumen", 100, 12, 10),
 fase(1), hpMax(200)  {
     }

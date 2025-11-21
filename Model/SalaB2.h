@@ -4,7 +4,9 @@
 
 #pragma once
 #include "Sala.h"
-
+/**Hecho por Santiago Sanchez y
+ *Alejandro Botero
+ */
 class SalaB2 : public Sala {
 public:
 

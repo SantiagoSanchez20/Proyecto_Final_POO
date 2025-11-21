@@ -2,7 +2,9 @@
 #define CLASE18POO_GUARDIANDELUMEN_H
 #include "Enemigo.h"
 
-
+/**Hecho por Santiago Sanchez y
+ *Alejandro Botero
+ */
 class GuardianDeLumen : public Enemigo{
 
 private:

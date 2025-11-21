@@ -2,7 +2,9 @@
 #define CLASE18POO_SALAINICIO_H
 #pragma once
 #include "Sala.h"
-
+/**Hecho por Santiago Sanchez y
+ *Alejandro Botero
+ */
 class SalaInicio : public Sala {
 public:
     SalaInicio();

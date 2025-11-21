@@ -4,6 +4,12 @@
 #include "Player.h" // Necesario para la firma de usar
 #include <iostream>
 
+
+/**Hecho por Santiago Sanchez y
+ *Alejandro Botero
+ */
+
+
 /**
  * @brief Implementación de Item para objetos que se pueden recoger
  * pero no tienen un efecto activo al ser 'usados' desde el inventario.

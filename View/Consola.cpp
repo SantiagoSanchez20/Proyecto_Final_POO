@@ -5,7 +5,9 @@
 #include <iostream>
 #include <cstdlib>
 #include <limits>
-
+/**Hecho por Santiago Sanchez y
+ *Alejandro Botero
+ */
 // --- Función de Bienvenida ---
 // Muestra el texto narrativo al iniciar el programa.
 void Consola::mostrarBienvenida() {

@@ -1,6 +1,8 @@
 #ifndef CLASE18POO_SALAB1_H
 #define CLASE18POO_SALAB1_H
-
+/**Hecho por Santiago Sanchez y
+ *Alejandro Botero
+ */
 #pragma once
 #include "Sala.h"
 

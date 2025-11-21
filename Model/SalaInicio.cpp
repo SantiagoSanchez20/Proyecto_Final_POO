@@ -3,7 +3,9 @@
 #include "Player.h"
 #include <iostream>
 #include <vector>
-
+/**Hecho por Santiago Sanchez y
+ *Alejandro Botero
+ */
 SalaInicio::SalaInicio() : Sala(
     "S",
     "Vestibulo Quebrado. Puerta principal del castillo; antorchas apagadas; un corredor que se bifurca."

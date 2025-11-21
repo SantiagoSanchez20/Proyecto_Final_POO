@@ -2,7 +2,9 @@
 #define CLASE18POO_NPC_H
 #include <string>
 #include "Personaje.h"
-
+/**Hecho por Santiago Sanchez y
+ *Alejandro Botero
+ */
 
 //Declaracion adelante para que compilador y la clase entienda que en el proyecto existe una clase Player
 class Player;

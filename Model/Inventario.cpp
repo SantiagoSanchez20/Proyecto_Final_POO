@@ -2,7 +2,9 @@
 #include "Item.h"
 #include <iostream>
 #include <algorithm> // Necesario para usar std::find
-
+/**Hecho por Santiago Sanchez y
+ *Alejandro Botero
+ */
 Inventario::Inventario() {
     // Se inicia vacío
 }
