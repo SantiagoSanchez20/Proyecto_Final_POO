@@ -35,7 +35,7 @@
 
 // Constructor
 GameManager::GameManager() : jugadorActual(nullptr), salaActual(nullptr),
-                             juegoActivo(true) {}
+                             juegoActivo(true), idSalaAnterior("") {}
 
 // Destructor
 GameManager::~GameManager() {
@@ -106,15 +106,23 @@ void GameManager::poblarMundo() {
 // --- IMPLEMENTACIÓN DE FLUJO ---
 void GameManager::buclePrincipal() {
     while (juegoActivo && jugadorActual->getHp() > 0) {
-        mostrarInfoSala();
+        // 1. Actualizar Buffs (Resta turnos y borra los vencidos)
+        //  Hacerlo ANTES de mostrar para que no se vean buffs con "0 turnos".
         jugadorActual->actualizarBuff();
-        std::cout << "\nHP Jugador: " << jugadorActual->getHp() << std::endl;
+
+        // 2. Mostrar Información de la Sala (Narrativa)
+        mostrarInfoSala();
+
+        // 3. Mostrar HUD del Jugador (¡NUEVO!)
+        mostrarEstadoJugador();
+
+        // 4. Manejar las opciones de la sala
         salaActual->manejarTurno(this, jugadorActual);
     }
 
     if (!juegoActivo) {
-        // El juego ya terminó por victoria o salida
-    } else if (jugadorActual->getHp() <= 0) { // Si se terminó por muerte
+        // Juego terminado manualmente o victoria
+    } else if (jugadorActual->getHp() <= 0) {
         terminarJuego(false);
     }
 }
@@ -153,6 +161,12 @@ void GameManager::cambiarSala(const std::string& nombreSala) {
     if (mapaDelJuego.find(nombreSala) == mapaDelJuego.end()) {
         std::cout << "[ERROR] La sala '" << nombreSala << "' no existe en el mapa." << std::endl;
         return;
+    }
+
+    //
+    if (salaActual != nullptr) {
+        //Guardamos el nombre actual (ej: "B2") antes de irnos a la nueva
+        this->idSalaAnterior = salaActual->nombre;
     }
 
     salaActual = mapaDelJuego[nombreSala];
@@ -305,4 +319,74 @@ void GameManager::transferirItemDeSalaAInventario(const std::string& nombreItem,
     } else {
         std::cout << "No ves ningun '" << nombreItem << "' aqui." << std::endl;
     }
+}
+
+void GameManager::gestionarInventario(Player* jugador) {
+    bool gestionando = true;
+
+    while (gestionando) {
+        // 1. Usamos la función de la Consola que muestra lista y pide número
+        int indice = Consola::seleccionarItemInventario(*jugador->inventario);
+
+        // 2. Si devuelve -1, es que el usuario eligió "0. Cancelar"
+        if (indice == -1) {
+            gestionando = false; // Salimos del bucle
+        }
+        else {
+            // 3. Obtenemos el objeto real
+            Item* item = jugador->inventario->obtenerItem(indice);
+
+            if (item) {
+                // 4. ¡USAMOS EL OBJETO!
+                // Si es Poción -> Cura.
+                // Si es Arma -> Se equipa.
+                jugador->usarItem(item);
+
+                // 5. Lógica de borrado (Si es poción se gasta)
+                if (dynamic_cast<Arma*>(item) == nullptr) {
+                    jugador->inventario->removerItem(item);
+                }
+
+                std::cout << "(Presiona Enter para continuar)...";
+                std::cin.get();
+            }
+        }
+    }
+}
+// Al final de GameManager.cpp
+
+void GameManager::mostrarEstadoJugador() {
+    std::cout << "\n================ ESTADO DEL JUGADOR ================" << std::endl;
+
+    // 1. MOSTRAR HP
+    std::cout << " VIDA: " << jugadorActual->getHp() << " HP" << std::endl;
+
+    // 2. MOSTRAR ATAQUE (Con desglose)
+    int ataqueTotal = jugadorActual->getDanoAtaqueTotal();
+    int ataqueBase = jugadorActual->ataqueBase;
+    int bonoArma = 0;
+    int bonoBuffs = 0;
+
+    if (jugadorActual->getArmaEquipada() != nullptr) {
+        bonoArma = jugadorActual->getArmaEquipada()->danioAdicional;
+    }
+
+    // Calculamos cuánto viene de buffs restando lo demás
+    bonoBuffs = ataqueTotal - ataqueBase - bonoArma;
+
+    std::cout << " ATAQUE: " << ataqueTotal;
+    std::cout << " (Base: " << ataqueBase;
+    if (bonoArma > 0) std::cout << " + Arma: " << bonoArma;
+    if (bonoBuffs > 0) std::cout << " + Buffs: " << bonoBuffs;
+    std::cout << ")" << std::endl;
+
+    // 3. MOSTRAR BUFFS ACTIVOS
+    if (!jugadorActual->buffsActivos.empty()) {
+        std::cout << " ESTADOS (BUFFS):" << std::endl;
+        for (const auto& buff : jugadorActual->buffsActivos) {
+            std::cout << "   * " << buff.nombre
+                      << " (Quedan " << buff.turnosRestantes << " turnos)" << std::endl;
+        }
+    }
+    std::cout << "====================================================" << std::endl;
 }

@@ -25,6 +25,9 @@ void SalaB1::manejarTurno(GameManager* game, Player* jugador) {
     char letraAtacar = '\0';
     char letraAvanzar = '\0';
 
+    // --- NUEVA VARIABLE PARA EL INVENTARIO ---
+    char letraInventario = '\0';
+
     // --- 1. Construcción del Menú ---
 
     if (!maelorAtacado) {
@@ -33,7 +36,7 @@ void SalaB1::manejarTurno(GameManager* game, Player* jugador) {
             opciones.push_back("Hablar con Maelor (Adivinanza)");
             letraHablar = opcionActual++;
 
-            opciones.push_back("Rodear a Maelor (Intentar escabullirse)"); // Texto más claro
+            opciones.push_back("Rodear a Maelor (Intentar escabullirse)");
             letraRodear = opcionActual++;
 
             opciones.push_back("Atacar a Maelor");
@@ -53,12 +56,16 @@ void SalaB1::manejarTurno(GameManager* game, Player* jugador) {
     mapaSalidas[opcionActual] = "S";
     opcionActual++;
 
+    // --- AGREGAMOS LA OPCIÓN DE INVENTARIO AQUÍ ---
+    opciones.push_back("Ver Inventario / Usar Items");
+    letraInventario = opcionActual++; // Guardamos la letra que le toque
+
     // --- 2. Leer Input ---
     char eleccion = presentarOpcionesYLeerInput(opciones);
 
     // --- 3. Lógica ---
 
-    // CASO: Hablar (A) -> Aquí SI inicia la adivinanza
+    // CASO: Hablar (A)
     if (!maelorAtacado && letraHablar != '\0' && eleccion == letraHablar) {
         Maelor* m = game->findPersonaje<Maelor*>("Maelor", this);
         if (m) {
@@ -75,17 +82,13 @@ void SalaB1::manejarTurno(GameManager* game, Player* jugador) {
         std::cout << "(Presiona Enter)..."; std::cin.get();
     }
 
-    // CASO: Rodear (B) -> ARREGLADO: Ahora solo te bloquea, no inicia la adivinanza
+    // CASO: Rodear (B)
     else if (!maelorAtacado && letraRodear != '\0' && eleccion == letraRodear) {
         Maelor* m = game->findPersonaje<Maelor*>("Maelor", this);
         if (m) {
             std::cout << "\nIntentas moverte sigilosamente hacia el lado derecho..." << std::endl;
             std::cout << "¡Maelor golpea el suelo con su baston!" << std::endl;
-            std::cout << "[Maelor] ¿A dónde crees que vas? Mis ojos ven más que simples figuras." << std::endl;
-            std::cout << "[Maelor] No puedes pasar sin demostrar tu valía. Habla conmigo o enfrentame." << std::endl;
-
-            // AQUÍ EL CAMBIO: No llamamos a iniciarAdivinanza().
-            // Simplemente le decimos que falló al intentar rodear.
+            std::cout << "[Maelor] No puedes pasar sin demostrar tu valia." << std::endl;
             std::cout << "(No lograste rodearlo. Vuelves a tu posición inicial)." << std::endl;
         }
         std::cout << "(Presiona Enter)..."; std::cin.get();
@@ -93,27 +96,20 @@ void SalaB1::manejarTurno(GameManager* game, Player* jugador) {
 
     // CASO: Atacar (C)
     else if (!maelorAtacado && letraAtacar != '\0' && eleccion == letraAtacar) {
-        std::cout << "¡Decides atacar al anciano! Maelor desaparece en una bomba de humo..." << std::endl;
+        std::cout << "¡Decides atacar al anciano! Maelor desaparece..." << std::endl;
         this->maelorAtacado = true;
-        game->removePersonaje("Maelor", this); // Borramos a Maelor de la sala
+        game->removePersonaje("Maelor", this);
 
-        // --- UN SOLO ENEMIGO ---
-        std::cout << "\n¡Un Soldado Corrupto salta de las sombras para defenderlo!" << std::endl;
-
+        std::cout << "\n¡Un Soldado Corrupto salta de las sombras!" << std::endl;
         Enemigo* guardia = new SoldadoCorrupto();
         this->personajesEnSala.push_back(guardia);
 
-        // Iniciamos el combate único
         game->iniciarCombate(jugador, guardia, true);
 
-        // Mensaje post-combate (solo si ganaste)
         if (jugador->estaVivo()) {
-            std::cout << "\nEl guardia ha caído. El camino hacia la siguiente sala está despejado." << std::endl;
+            std::cout << "\nEl guardia ha caído. El camino está despejado." << std::endl;
         }
-
-        // Pausa para leer lo que pasó
-        std::cout << "(Presiona Enter)...";
-        std::cin.get();
+        std::cout << "(Presiona Enter)..."; std::cin.get();
     }
 
     // CASO: Avanzar
@@ -131,6 +127,12 @@ void SalaB1::manejarTurno(GameManager* game, Player* jugador) {
     else if (mapaSalidas.count(eleccion)) {
         game->cambiarSala(mapaSalidas[eleccion]);
     }
+
+    // --- CASO: INVENTARIO
+    else if (eleccion == letraInventario) {
+        game->gestionarInventario(jugador);
+    }
+
     else {
         std::cout << "Opcion no valida." << std::endl;
     }

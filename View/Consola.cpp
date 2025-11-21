@@ -1,11 +1,13 @@
 #include "Consola.h"
-#include "..\Model/Inventario.h" // <--- Necesario para usar el inventario
-#include "..\Model/Item.h"       // <--- Necesario para ver el nombre del item
+#include "../Model/Inventario.h"
+#include "../Model/Item.h"
+#include "../Model/Arma.h" // <--- Asegúrate de que este include esté aquí
 #include <iostream>
-#include <cstdlib>      // Para system("cls")
-#include <limits>       // Para limpiar el buffer de entrada
+#include <cstdlib>
+#include <limits>
 
-// --- Lo que ya tenías ---
+// --- Funciones que ya tenías (Se quedan igual) ---
+
 void Consola::mostrarBienvenida() {
     std::cout << "\n======================================" << std::endl;
     std::cout << "  BIENVENIDO AL CASTILLO BASTION INMORTAL " << std::endl;
@@ -22,8 +24,6 @@ void Consola::mostrarGameOver(bool victoria) {
     }
 }
 
-// --- LO NUEVO QUE DEBES AGREGAR AL FINAL ---
-
 void Consola::limpiarPantalla() {
     #ifdef _WIN32
         system("cls");
@@ -34,41 +34,54 @@ void Consola::limpiarPantalla() {
 
 void Consola::esperarEnter() {
     std::cout << "\n[Presiona ENTER para continuar...]";
-    // Ignora cualquier caracter que haya quedado en el buffer
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-    std::cin.get(); // Espera una tecla
+    std::cin.get();
 }
+
+// --- AQUÍ ESTÁ EL CAMBIO PRINCIPAL ---
+// Reemplaza tu función anterior con esta versión:
 
 int Consola::seleccionarItemInventario(Inventario& inventario) {
     std::cout << "\n=== SELECCIONA UN OBJETO ===" << std::endl;
 
     if (inventario.getCantidad() == 0) {
         std::cout << "(Inventario vacio)" << std::endl;
-        // esperarEnter(); // Opcional, depende de tu flujo
         return -1;
     }
 
-    // Mostramos los items numerados: 1. Pocion, 2. Daga...
+    // Bucle mejorado para detectar Armas
     for (int i = 0; i < inventario.getCantidad(); ++i) {
         Item* item = inventario.obtenerItem(i);
+
         if (item != nullptr) {
-            std::cout << "  " << (i + 1) << ". " << item->getNombre()
-                      << " (" << item->getDescripcion() << ")" << std::endl;
+            std::cout << "  " << (i + 1) << ". " << item->getNombre();
+
+            // Intentamos ver si el item es un Arma
+            Arma* arma = dynamic_cast<Arma*>(item);
+
+            if (arma != nullptr) {
+                // ¡ES UN ARMA! Mostramos daño y efecto
+                std::cout << " (Dano: +" << arma->danioAdicional
+                          << " | Efecto: " << arma->efectoEspecial << ")" << std::endl;
+            }
+            else {
+                // NO ES ARMA (Es poción u otro). Mostramos descripción normal.
+                std::cout << " (" << item->getDescripcion() << ")" << std::endl;
+            }
         }
     }
+
     std::cout << "  0. Cancelar / Volver atras" << std::endl;
     std::cout << "> ";
 
     int opcion;
     std::cin >> opcion;
 
-    // Limpiamos el buffer por seguridad (por si escribe letras)
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
     if (opcion <= 0 || opcion > inventario.getCantidad()) {
-        return -1; // Cancelar o opción inválida
+        return -1;
     }
 
-    // Convertimos el número del usuario (1) al índice del vector (0)
     return (opcion - 1);
 }

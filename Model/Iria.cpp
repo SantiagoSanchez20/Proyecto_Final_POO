@@ -20,5 +20,5 @@ void Iria::darBuff(Player* jugador) {
     jugador->agregarBuff(bendicion);
 }
 void Iria::darPistaLlave() {
-    std::cout << "[Iria] Pista: Hay una arma poderosa.....que esta en una piedra....clavada...donde estara?.. busca en las otras habitaciones queriedo extrano" << std::endl;
+    std::cout << "[Iria] Pista: Hay una arma poderosa.....que esta en una piedra....clavada...donde estara?.. busca en las otras habitaciones queriedo extraño.....regresate a las anteriores" << std::endl;
 }

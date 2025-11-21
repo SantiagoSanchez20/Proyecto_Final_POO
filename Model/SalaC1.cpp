@@ -2,8 +2,10 @@
 #include "../Controller/GameManager.h"
 #include "Player.h"
 #include "Trampa.h"
+#include "Inventario.h"
 #include <iostream>
 #include <map>
+#include <limits>
 
 // Constructor
 SalaC1::SalaC1() : Sala(
@@ -11,75 +13,123 @@ SalaC1::SalaC1() : Sala(
     "Camara de las Reliquias. Estanterias con reliquias; una daga antigua brilla en la penumbra."
 ), puzzleResuelto(false), dagaRecogida(false)
 {
-    salidas["Avanzar hacia la Camara del Acolito"] = "C2";
-    salidas["Regresar al Vestibulo"] = "S";
-    trampasEnSala.push_back(new Trampa("Dardos Ocultos", 10));
+    // NOTA: Ya no usamos el mapa 'salidas' automático para "Avanzar"
+    // porque necesitamos controlar la lógica manualmente.
+    // Solo dejamos la salida segura (Regresar) en el mapa si quisieramos,
+    // pero lo haremos todo manual para mayor control.
+
+    trampasEnSala.push_back(new Trampa("Dardos de Pared", 15)); // Daño 15
 }
 
-// Evento al entrar
 void SalaC1::alEntrar(GameManager* game, Player* jugador) {
     Sala::alEntrar(game, jugador);
 
+    // Narrativa de entrada
     if (!puzzleResuelto) {
-        std::cout << "\n¡CLICK! Pisas una placa de presion en el suelo..." << std::endl;
-        if (!trampasEnSala.empty()) {
-            trampasEnSala[0]->activar(jugador);
-        }
+        std::cout << "Notas que el suelo tiene placas de presion extrañas." << std::endl;
+        std::cout << "La puerta hacia la siguiente camara parece cerrada por un mecanismo." << std::endl;
     }
 }
 
-// Menú de opciones
 void SalaC1::manejarTurno(GameManager* game, Player* jugador) {
 
     std::vector<std::string> opciones;
-    std::map<char, std::string> mapaSalidas;
     char opcionActual = 'a';
 
-    // 1. Opciones Específicas
+    // Variables para guardar letras dinámicas
+    char letraPuzzle = '\0';
+    char letraTomarDaga = '\0';
+    char letraAvanzar = '\0';   // Salida bloqueada
+    char letraRegresar = '\0';  // Salida segura
+    char letraInventario = '\0';
+    char letraSalir = '\0';
+
+    // --- 1. Construcción del Menú ---
+
+    // A. Puzzle (Si no está resuelto)
     if (!puzzleResuelto) {
-        opciones.push_back("Resolver puzzle de las estanterias");
+        opciones.push_back("Resolver puzzle de las estanterias. ");
+        letraPuzzle = opcionActual++;
     }
+    // A. Tomar Daga (Si está resuelto pero no recogida)
     else if (!dagaRecogida) {
         opciones.push_back("Tomar la Daga de Velo");
+        letraTomarDaga = opcionActual++;
     }
 
-    // 2. Salidas, Inventario, Salir
-    char inicioSalidas = 'a' + opciones.size();
+    // B. Avanzar (La trampa)
+    opciones.push_back("Avanzar hacia la Camara del Acolito (C2)");
+    letraAvanzar = opcionActual++;
 
-    for (auto const& [texto, id] : this->salidas) {
-        opciones.push_back(texto);
-        mapaSalidas[inicioSalidas] = id;
-        inicioSalidas++;
-    }
+    // C. Regresar
+    opciones.push_back("Regresar al Vestibulo (S)");
+    letraRegresar = opcionActual++;
 
-    opciones.push_back("Ver Inventario");
-    char opcionInventario = inicioSalidas++;
+    // D. Inventario
+    opciones.push_back("Ver Inventario / Usar Items");
+    letraInventario = opcionActual++;
+
+    // E. Salir
     opciones.push_back("Salir del Juego");
-    char opcionSalir = inicioSalidas++;
+    letraSalir = opcionActual++;
 
+    // --- 2. Leer Input ---
     char eleccion = presentarOpcionesYLeerInput(opciones);
 
-    // 3. Procesar
-    if (!puzzleResuelto && eleccion == 'a') {
-        std::cout << "\nMueves los libros en el orden correcto..." << std::endl;
-        std::cout << "¡CLICK! Escuchas los mecanismos de las trampas desactivarse." << std::endl;
+    // --- 3. Lógica ---
+
+    // CASO: Resolver Puzzle
+    if (!puzzleResuelto && letraPuzzle != '\0' && eleccion == letraPuzzle) {
+        std::cout << "\nObservas los libros antiguos y encuentras un patron..." << std::endl;
+        std::cout << "Mueves el tomo rojo, luego el azul..." << std::endl;
+        std::cout << "¡CLICK! Los mecanismos de defensa se apagan. La puerta se desbloquea." << std::endl;
         this->puzzleResuelto = true;
+        std::cout << "(Presiona Enter)..."; std::cin.get();
     }
-    else if (puzzleResuelto && !dagaRecogida && eleccion == 'a') {
+
+    // CASO: Tomar Daga
+    else if (puzzleResuelto && !dagaRecogida && letraTomarDaga != '\0' && eleccion == letraTomarDaga) {
         game->transferirItemDeSalaAInventario("Daga de Velo", this, jugador);
         this->dagaRecogida = true;
+        std::cout << "(Presiona Enter)..."; std::cin.get();
     }
-    else if (mapaSalidas.count(eleccion)) {
-        game->cambiarSala(mapaSalidas[eleccion]);
+
+    // CASO: Avanzar (LA TRAMPA)
+    else if (eleccion == letraAvanzar) {
+        if (!puzzleResuelto) {
+            // --- BLOQUEO Y DAÑO ---
+            std::cout << "\nIntentas forzar la puerta hacia la camara del acolito..." << std::endl;
+            std::cout << "¡CRACK! ¡No has desactivado la seguridad!" << std::endl;
+
+            if (!trampasEnSala.empty()) {
+                trampasEnSala[0]->activar(jugador); // Aplica daño y muestra mensaje
+            }
+
+            std::cout << "Retrocedes herido. Debes resolver el puzzle primero." << std::endl;
+            std::cout << "(Presiona Enter)..."; std::cin.get();
+            // NO CAMBIAMOS DE SALA
+        }
+        else {
+            // --- PASE PERMITIDO ---
+            game->cambiarSala("C2");
+        }
     }
-    else if (eleccion == opcionInventario) {
-        jugador->inventario->mostrar();
-        std::cout << "(Enter para continuar)";
-        std::cin.get();
+
+    // CASO: Regresar
+    else if (eleccion == letraRegresar) {
+        game->cambiarSala("S");
     }
-    else if (eleccion == opcionSalir) {
+
+    // CASO: Inventario
+    else if (eleccion == letraInventario) {
+        game->gestionarInventario(jugador);
+    }
+
+    // CASO: Salir
+    else if (eleccion == letraSalir) {
         game->terminarJuego(false);
     }
+
     else {
         std::cout << "Opcion no valida." << std::endl;
     }

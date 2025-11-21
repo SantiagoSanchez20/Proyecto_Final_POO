@@ -7,7 +7,7 @@
 
 Player::Player()
 : Personaje("Jugador",100),
-ataqueBase(8),
+ataqueBase(10),
 hpMax(100),
 armaEquipada(nullptr)
 {
@@ -87,40 +87,47 @@ void Player::atacar(Enemigo* objetivo) {
         std::cout << "[Jugador] El objetivo " << objetivo->getNombre() << " ya esta derrotado." << std::endl;
         return;
     }
-    //Calcular daño ( Base + buff )
+
+    // 1. Calcular daño base (Stats + Buffs)
     int danoTotal = this->getDanoAtaqueTotal();
-    std::string nombreArma = "sus punos";
+    std::string nombreArma = "su Espada de Hierro";
 
     bool esCritico = false;
     bool aturde = false;
 
-    // Verifica el arma y efectos
+    // 2. Verificar bonos del arma (Aquí ocurre la magia del azar)
     if (this->armaEquipada != nullptr) {
         danoTotal += this->armaEquipada->danioAdicional;
-        nombreArma =  "su " + this->armaEquipada->getNombre();
+        nombreArma = "su " + this->armaEquipada->getNombre();
 
-        //Se usa Rand para genera numero del 0 - 100
-        //Probabilidad de critico
-        if (rand() % 100 < this->armaEquipada->chanceCritico) {
+        // --- CÁLCULO DE CRÍTICO ---
+        // Generamos un número del 0 al 99. Si es menor que el porcentaje, es crítico.
+        if ((rand() % 100) < this->armaEquipada->chanceCritico) {
             esCritico = true;
-            danoTotal *= 2;
+            danoTotal *= 2; // El crítico duplica el daño final
         }
 
-        if (rand() % 100 < this->armaEquipada->chanceAturdir) {
+        // --- CÁLCULO DE ATURDIR ---
+        if ((rand() % 100) < this->armaEquipada->chanceAturdir) {
             aturde = true;
         }
     }
 
+    // 3. Imprimir resultado limpio
     std::cout << "[Jugador] " << this->nombre << " ataca a " << objetivo->getNombre()
-          << " con " << nombreArma;
+        << " con " << nombreArma;
 
-    if (esCritico) std::cout << " ¡GOLPE CRITICO! ";
-    std::cout<< " inflige " << danoTotal << " de dano." << std::endl;
-
-    if (aturde) {
-        std::cout << "[Efecto] ¡" << objetivo->getNombre() << " ha quedado ATURDIDO!" << std::endl;
+    if (esCritico) {
+        std::cout << " ¡GOLPE CRITICO!";
     }
 
+    std::cout << " e inflige " << danoTotal << " de dano." << std::endl;
+
+    if (aturde) {
+        std::cout << "[Efecto] ¡" << objetivo->getNombre() << " ha quedado ATURDIDO por el golpe!" << std::endl;
+    }
+
+    // 4. Aplicar el daño calculado
     objetivo->recibirDano(danoTotal);
 }
 

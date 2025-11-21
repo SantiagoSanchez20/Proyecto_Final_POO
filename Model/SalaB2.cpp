@@ -23,6 +23,9 @@ void SalaB2::manejarTurno(GameManager* game, Player* jugador) {
     char letraSacarEspada = '\0';
     char letraTomarEspada = '\0';
 
+    // --- NUEVA VARIABLE PARA INVENTARIO ---
+    char letraInventario = '\0';
+
     // --- 1. Construcción del Menú ---
 
     if (!guardiaVencido) {
@@ -41,7 +44,7 @@ void SalaB2::manejarTurno(GameManager* game, Player* jugador) {
 
     // Salidas
     opciones.push_back("Avanzar hacia el Salon Central (a E)");
-    char letraAvanzar = opcionActual; // No la metemos al mapa automático para validar lógica si quieres
+    char letraAvanzar = opcionActual;
     mapaSalidas[letraAvanzar] = "E";
     opcionActual++;
 
@@ -49,61 +52,51 @@ void SalaB2::manejarTurno(GameManager* game, Player* jugador) {
     mapaSalidas[opcionActual] = "B1";
     opcionActual++;
 
+    // --- AGREGAMOS LA OPCIÓN DE INVENTARIO ---
+    opciones.push_back("Ver Inventario / Usar Items");
+    letraInventario = opcionActual++;
+
     // --- 2. Leer Input ---
     char eleccion = presentarOpcionesYLeerInput(opciones);
 
     // --- 3. Lógica ---
 
-    // CASO A: Observar (Esto te da la ventaja)
+    // CASO: Observar
     if (!guardiaVencido && letraObservar != '\0' && eleccion == letraObservar) {
         std::cout << "\nTe tomas un momento para estudiar las sombras..." << std::endl;
         std::cout << "¡Lo ves! Hay un Guardia Pesado camuflado justo al lado del bloque." << std::endl;
         std::cout << "(Ahora sabes donde esta. Si atacas, tendras la ventaja)." << std::endl;
 
-        this->jugadorYaObservo = true; // <--- ¡AQUÍ ACTIVAMOS LA VENTAJA!
+        this->jugadorYaObservo = true;
 
         std::cout << "(Presiona Enter)..."; std::cin.get();
     }
 
-    // CASO B: Sacar Espada (Inicia Combate)
+    // CASO: Sacar Espada (Combate)
     else if (!guardiaVencido && letraSacarEspada != '\0' && eleccion == letraSacarEspada) {
         Enemigo* guardia = game->findPersonaje<Enemigo*>("Guardian Pesado", this);
 
         if (guardia) {
-            // LÓGICA DE INICIATIVA
             if (this->jugadorYaObservo) {
-                // ESCENARIO 1: El jugador observó antes
-                std::cout << "\nTe acercas a la espada, pero giras rapidamente hacia la sombra..." << std::endl;
-                std::cout << "¡Sorprendes al Guardia Pesado antes de que pueda emboscarte!" << std::endl;
+                std::cout << "\n¡Sorprendes al Guardia Pesado antes de que pueda emboscarte!" << std::endl;
                 std::cout << "--- TIENES LA INICIATIVA (ATACAS PRIMERO) ---" << std::endl;
-
-                // true = Jugador Ataca Primero
                 game->iniciarCombate(jugador, guardia, true);
             }
             else {
-                // ESCENARIO 2: El jugador fue imprudente
-                std::cout << "\nAgarras el mango de la espada..." << std::endl;
-                std::cout << "¡CUIDADO! Un guantelete de metal te golpea desde las sombras." << std::endl;
-                std::cout << "¡Es una emboscada del Guardia Pesado!" << std::endl;
+                std::cout << "\nAgarras el mango de la espada... ¡CUIDADO! ¡Emboscada!" << std::endl;
                 std::cout << "--- EL ENEMIGO TIENE LA INICIATIVA ---" << std::endl;
-
-                // false = Jugador NO ataca primero (Enemigo ataca)
                 game->iniciarCombate(jugador, guardia, false);
             }
 
-            // Verificar si ganamos
             if (guardia->getHp() <= 0) {
                 this->guardiaVencido = true;
-                std::cout << "\nEl guardia cae con un estruendo metalico." << std::endl;
-                std::cout << "Ahora puedes tomar la espada sin peligro." << std::endl;
+                std::cout << "\nEl guardia cae. Ahora puedes tomar la espada sin peligro." << std::endl;
             }
-        } else {
-            std::cout << "Extraño... sentías una presencia pero no hay nadie." << std::endl;
         }
         std::cout << "(Presiona Enter)..."; std::cin.get();
     }
 
-    // CASO: Tomar Espada (Post-Combate)
+    // CASO: Tomar Espada
     else if (guardiaVencido && !espadaRecogida && eleccion == letraTomarEspada) {
         game->transferirItemDeSalaAInventario("Espada de Bruma", this, jugador);
         this->espadaRecogida = true;
@@ -114,6 +107,12 @@ void SalaB2::manejarTurno(GameManager* game, Player* jugador) {
     else if (mapaSalidas.count(eleccion)) {
         game->cambiarSala(mapaSalidas[eleccion]);
     }
+
+    // --- CASO: INVENTARIO
+    else if (eleccion == letraInventario) {
+        game->gestionarInventario(jugador);
+    }
+
     else {
         std::cout << "Opcion no valida." << std::endl;
     }

@@ -22,10 +22,19 @@ class Item;
 
 class GameManager {
 public:
+    //Para saber en que sala.
+    std::string idSalaAnterior;
+
+    //para que este el inventario en cada sala
+    void gestionarInventario(Player* jugador);
+
     // --- Métodos de Flujo de Juego ---
     GameManager();
     ~GameManager();
     void iniciarJuego();
+
+
+
 
     // --- Métodos "Servicio" ---
     void iniciarCombate(Player* jugador, Enemigo* enemigo, bool jugadorAtacaPrimero);
@@ -64,7 +73,7 @@ private:
     void buclePrincipal();
     void mostrarInfoSala();
     void poblarMundo();
-
+    void mostrarEstadoJugador();
     Player* jugadorActual;
     Sala* salaActual;
     std::map<std::string, Sala*> mapaDelJuego;
