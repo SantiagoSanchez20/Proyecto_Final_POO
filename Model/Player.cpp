@@ -158,7 +158,7 @@ void Player::curar(int cantidad) {
 void Player::usarItem(Item* item) {
     if (item != nullptr) {
         // Aquí asumimos que la clase Item tiene un método usar(Player*)
-        // item->usar(this);
+        item->usar(this);
         std::cout << "Usando item: " << item->getNombre() << std::endl;
     }
 }

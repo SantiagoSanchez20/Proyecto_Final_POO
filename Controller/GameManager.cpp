@@ -189,40 +189,37 @@ void GameManager::iniciarCombate(Player* jugador, Enemigo* enemigo, bool jugador
             std::cout << "2. Usar Item" << std::endl;
             std::cout << "> ";
 
-            int opcion;
+            // --- CAMBIO AQUÍ: Usamos 'char' en vez de 'int' ---
+            char opcion;
             std::cin >> opcion;
+
+            // Limpiamos el buffer por si escribieron "1abc"
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
-            if (opcion == 1) {
+            // Comparamos con el CARÁCTER '1', no el número 1
+            if (opcion == '1') {
                 jugador->atacar(enemigo);
             }
-            else if (opcion == 2) {
-                // --- AQUÍ ESTÁ EL CAMBIO CLAVE ---
-
-                // 1. Llamamos al menú de la consola
+            else if (opcion == '2') {
                 int indice = Consola::seleccionarItemInventario(*jugador->inventario);
 
-                // 2. Verificamos si eligió algo válido (-1 es cancelar)
                 if (indice != -1) {
                     Item* item = jugador->inventario->obtenerItem(indice);
-
                     if (item) {
                         jugador->usarItem(item);
-
-                        // 3. Si es un consumible (no es arma), lo borramos
-                        // Necesitas #include "../Model/Arma.h" para esto
+                        // Borrar si es consumible
                         if (dynamic_cast<Arma*>(item) == nullptr) {
                             jugador->inventario->removerItem(item);
                         }
+                        // IMPORTANTE: Usar item consume turno, salimos del if/else
                     }
                 } else {
-                    // Si canceló, reiniciamos el bucle para que no pierda el turno
                     std::cout << "Volviendo al menu de combate..." << std::endl;
-                    continue;
+                    continue; // Vuelve al inicio del while sin cambiar turno
                 }
             } else {
-                std::cout << "Opcion invalida." << std::endl;
-                continue; // Volver a preguntar
+                std::cout << "Opcion invalida. Escribe 1 o 2." << std::endl;
+                continue; // Vuelve a preguntar sin que el enemigo ataque
             }
         } else {
             // TURNO ENEMIGO
