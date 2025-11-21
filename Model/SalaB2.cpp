@@ -57,7 +57,7 @@ void SalaB2::manejarTurno(GameManager* game, Player* jugador) {
             game->iniciarCombate(jugador, guardia, false); // false = enemigo ataca primero
         }
         // Cuando el combate termina, revisamos si ganó
-        if (guardia->hp <= 0) {
+        if (guardia->getHp() <= 0) {
             this->guardiaVencido = true;
             std::cout << "El guardia cae. La Espada de Bruma se suelta." << std::endl;
         }

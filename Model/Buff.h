@@ -1,7 +1,3 @@
-//
-// Created by ssanc on 18/11/2025.
-//
-
 #ifndef CLASE18POO_BUFF_H
 #define CLASE18POO_BUFF_H
 #include <string>

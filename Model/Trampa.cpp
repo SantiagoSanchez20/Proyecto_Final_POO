@@ -1,5 +1,5 @@
 #include "Trampa.h"
-#include "Player.h" // Necesario para restar vida (hp)
+#include "Player.h"
 #include <iostream>
 
 // Constructor
@@ -10,9 +10,8 @@ void Trampa::activar(Player* jugador) {
     std::cout << "\n*** CUIDADO ***" << std::endl;
     std::cout << "¡La trampa '" << nombre << "' se ha activado!" << std::endl;
 
-    jugador->hp -= dano;
-    if (jugador->hp < 0) jugador->hp = 0;
+    jugador->recibirDano(dano);
 
     std::cout << "Recibes " << dano << " puntos de dano." << std::endl;
-    std::cout << "Tu HP actual: " << jugador->hp << std::endl;
+    std::cout << "Tu HP actual: " << jugador->getHp() << std::endl;
 }

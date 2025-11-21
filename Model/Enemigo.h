@@ -1,12 +1,7 @@
-//
-// Created by ssanc on 15/11/2025.
-//
-
 #ifndef CLASE18POO_ENEMIGO_H
 #define CLASE18POO_ENEMIGO_H
 #include "Personaje.h"
 #include "Player.h"
-//enemigo.hdddd
 class Enemigo : public Personaje{
     public:
 

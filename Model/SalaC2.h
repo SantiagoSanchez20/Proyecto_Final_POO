@@ -1,8 +1,6 @@
 
 #ifndef CLASE18POO_SALAC2_H
 #define CLASE18POO_SALAC2_H
-
-
 #pragma once
 #include "Sala.h"
 

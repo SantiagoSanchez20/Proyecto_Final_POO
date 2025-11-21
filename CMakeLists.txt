@@ -58,5 +58,7 @@ add_executable(Clase18POO main.cpp
         Model/Iria.h
         Model/Buff.cpp
         Model/Buff.h
+        Model/CollectibleItem.cpp
+        Model/CollectibleItem.h
 )
 ##dasdadsadasdasdas

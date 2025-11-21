@@ -46,7 +46,7 @@ void SalaFinalE::manejarTurno(GameManager* game, Player* jugador) {
         if (jefe) {
             std::cout << "¡El Guardián de Lúmen te enfrenta! ¡La batalla final comienza!" << std::endl;
             game->iniciarCombate(jugador, jefe, true);
-            if (jefe->hp <= 0) {
+            if (jefe->getHp() <= 0) {
                 this->jefeVencido = true;
                 std::cout << "Con un último esfuerzo, el Guardián cae. La Aureus es tuya." << std::endl;
             }

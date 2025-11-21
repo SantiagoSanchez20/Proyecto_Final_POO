@@ -1,9 +1,4 @@
-//
-// Created by ssanc on 15/11/2025.
-//
-
 #include "Enemigo.h"
-//enemigo.cpp dd
 
 // --- Constructor ---
 Enemigo::Enemigo(const std::string& nombre, int hp, int ataque, int experiencia)

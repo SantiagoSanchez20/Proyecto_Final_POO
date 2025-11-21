@@ -1,39 +1,26 @@
-//
-// Created by duque on 10/11/2025.
-//
+#ifndef INVENTARIO_H
+#define INVENTARIO_H
 
-#ifndef CLASE18POO_INVENTARIO_H
-#define CLASE18POO_INVENTARIO_H
 #include <vector>
-#include "Item.h"
+#include <string>
 
+class Item; // Declaración adelantada
 
-class Inventario
-{
-private:
-    //Creamos un lista para que almacene todos los Objetos
+class Inventario {
+public:
     std::vector<Item*> items;
 
-
-public:
-
-    //Creamos el contructor
     Inventario();
 
-    //Destructor para borrar los punteros en memoria
-    ~Inventario();
-
-
-
-    // Creamos una funcion para que cuando el jugador pueda agregar o quitar items(utlizados)
     bool agregarItem(Item* item);
+
+    // Función necesaria para cuando usas pociones
+    void removerItem(Item* item);
 
     Item* buscarItem(const std::string& nombre);
 
-    void mostrarItems() const;
-
-
+    // Función que llama SalaC1
+    void mostrar();
 };
 
-
-#endif //CLASE18POO_INVENTARIO_H
+#endif // INVENTARIO_H

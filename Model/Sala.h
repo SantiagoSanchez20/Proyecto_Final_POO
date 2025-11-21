@@ -1,4 +1,3 @@
-
 #ifndef CLASE18POO_SALA_H
 #define CLASE18POO_SALA_H
 #pragma once
@@ -6,7 +5,8 @@
 #include <string>
 #include <iostream>
 #include <map>
-#include "../Controller/GameManager.h"
+// #include "../Controller/GameManager.h" <--- ¡ELIMINADO para romper el ciclo!
+#include "Inventario.h"
 
 class Player;
 class Personaje;
@@ -29,11 +29,6 @@ public:
         std::cout << descripcion << std::endl;
     }
 
-    //Muestra las opciones (A, B, C...) específicas de esta sala.
-    //Muestra las salidas genéricas (D, E...).
-    //Lee el input del usuario (un 'char').
-    //Ejecuta la lógica para esa opción (llama a game->iniciarCombate, etc.).
-
     virtual void manejarTurno(GameManager* game, Player* jugador);
 
 protected:
@@ -42,4 +37,4 @@ protected:
     char presentarOpcionesYLeerInput(const std::vector<std::string>& opciones);
 };
 
-#endif //CLASE18POO_SALA_H
+#endif //CLASE18POO_SALA_HCLASE18POO_SALA_H

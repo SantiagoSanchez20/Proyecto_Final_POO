@@ -1,7 +1,3 @@
-//
-// Created by duque on 10/11/2025.
-//
-
 #include "Item.h"
 // Implementación del constructor
 Item::Item(const std::string& nombre, const std::string& descripcion)

@@ -75,7 +75,7 @@ void SalaB1::manejarTurno(GameManager* game, Player* jugador) {
 
         // Llama al combate
         game->iniciarCombate(jugador, s1, true);
-        if (jugador->hp > 0) {
+        if (jugador->getHp() > 0) {
             game->iniciarCombate(jugador, s2, true);
         }
     }

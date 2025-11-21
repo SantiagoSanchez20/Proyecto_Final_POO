@@ -1,6 +1,5 @@
 #ifndef CLASE18POO_SALAC1_H
 #define CLASE18POO_SALAC1_H
-
 #pragma once
 #include "Sala.h"
 #include <vector>

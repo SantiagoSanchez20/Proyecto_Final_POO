@@ -1,21 +1,16 @@
-//
-// Created by duque on 10/11/2025.
-//
-
 #ifndef CLASE18POO_CONSOLA_H
 #define CLASE18POO_CONSOLA_H
+#pragma once
 
-#include <iostream>
-#include <locale.h>
-#include <windows.h>
+#include <string>
 
-
-class Consola
-{
+class Consola {
 public:
-static int mostrarMenu();
-static;
+    // Muestra el mensaje inicial del juego
+    static void mostrarBienvenida();
+
+    // Muestra el mensaje final (Game Over o Victoria)
+    static void mostrarGameOver(bool victoria);
 };
 
-
-#endif //CLASE18POO_CONSOLA_H
+#endif //CLASE18POO_CONSOLA_HOO_CONSOLA_H

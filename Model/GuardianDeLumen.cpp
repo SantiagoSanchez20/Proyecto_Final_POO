@@ -1,41 +1,42 @@
-//
-// Created by ssanc on 16/11/2025.
-//
-
 #include "GuardianDeLumen.h"
 #include "Player.h"
+#include <iostream>
+#include <cmath> // Para static_cast
 
-GuardianDeLumen::GuardianDeLumen() : Enemigo("Guardian de Lumen", 50 , 12, 10),
-fase(1), hpMax(100)  {
-    std::cout << " El "<<this->nombre << "Ha aparecido..... Derrotalo! " << std::endl;
+// --- Constructor ---
+// Ajustamos la vida (HP) a 200 para que sea un jefe apropiado.
+GuardianDeLumen::GuardianDeLumen() : Enemigo("Guardian de Lumen", 200, 12, 10),
+fase(1), hpMax(200)  {
+    std::cout << " El "<<this->nombre << " ha aparecido..... ¡Derrotalo! " << std::endl;
 }
-//guardian de lumenddddd
+
+// --- Destructor
+GuardianDeLumen::~GuardianDeLumen() {
+    // Es suficiente con la definición vacía para que el Linker lo encuentre.
+}
 void GuardianDeLumen::cambiarFase() {
-    if (!this->estaVivo()) {
+    if (!this->estaVivo() || this->hpMax == 0) {
         return;
     }
 
-        float hpPorcent = (float)this->hp / this->hpMax;
+    float hpPorcent = (float)this->hp / this->hpMax;
 
 
-    //Fase 3  Ataques  HP(HP( 1% a 39%) Ataques mas fuertes,mas daño
+    // Fase 3 (HP 1% a 39%)
     if (hpPorcent <= 0.39f && this->fase < 3 ) {
         this->fase = 3;
         this->ataque  += 3;
-        std::cout << "El " << this->nombre << "ruge de furia y entra en.... ¡Fase 3!"<< std::endl;
+        std::cout << "El " << this->nombre << " ruge de furia y entra en.... ¡FASE 3!"<< std::endl;
+        // La lógica del GameManager ya actualiza el HP máximo si fuera necesario.
     }
 
-    //Fase 2   HP(HP( 40% a 74%) habilidades especiales
-
-    if (hpPorcent <= 0.74f && this->fase < 2 ) {
+    // Fase 2 (HP 40% a 74%)
+    else if (hpPorcent <= 0.74f && this->fase < 2 ) {
         this->fase = 2;
         this->ataque  += 2;
-        std::cout << "El " << this->nombre << "Concentra energia... ¡Fase 2!"<< std::endl;
-
+        std::cout << "El " << this->nombre << " concentra energia... ¡FASE 2!"<< std::endl;
     }
-    //Fase 1     HP( 75 % a 100%) golpes normales, por lo tanto no se implementa por que ya viene
-    //por defecto
-
+    // Fase 1 (75 % a 100%) - Por defecto.
 }
 
 void GuardianDeLumen::recibirDano(int cantidad) {
@@ -43,24 +44,20 @@ void GuardianDeLumen::recibirDano(int cantidad) {
     if (this->hp < 0 ) {
         this->hp = 0;
     }
-    std::cout << "El " << this->nombre << " recibe " << cantidad << "de dano" <<
-        "vida restante:" << this-> hp << "/" << this->hpMax << std::endl;
+    std::cout << "El " << this->nombre << " recibe " << cantidad << " de dano. " <<
+        "Vida restante: " << this-> hp << "/" << this->hpMax << std::endl;
 
-    //Comprobamos el cambio de fase
-
+    // Comprobamos el cambio de fase
     this-> cambiarFase();
 
-    //Comprobar si el jefe ha muerto
-
-    if (this->estaVivo()) {
+    //Comprobamos si el jefe ha muerto
+    if (!this->estaVivo()) { // O usando this->hp <= 0
         std::cout << "El " << this->nombre << " ha sido derrotado." << std::endl;
-        //Aqui deberia soltar ya la recompensa
+        // El GameManager maneja la recompensa
     }
-
 }
 
 void GuardianDeLumen::atacar(Player *objetivo) {
-    // Comprueba si puede atacar
     if (!this->estaVivo()) {
         return;
     }
@@ -82,23 +79,17 @@ void GuardianDeLumen::atacar(Player *objetivo) {
 }
 
 void GuardianDeLumen::ataqueSimple(Player* objetivo) {
-    // Ataque simple pero regular (daño base)
     std::cout << "El " << this->nombre << " (Fase 1) lanza un golpe simple." << std::endl;
     objetivo->recibirDano(this->ataque);
 }
 void GuardianDeLumen::ataqueEspecial(Player* objetivo) {
-    // Daño mayor (ej. 1.5x del ataque base)
-
-
-    int danoEspecial = static_cast<int>(this->ataque * 1.15); // static_cast<int> es para forzar la conversion de un tipo de dato a otro
-    std::cout << "El " << this->nombre << " (Fase 2) usa daño en area!" << std::endl; //Cambiar a que tipo de daño usara
+    int danoEspecial = static_cast<int>(this->ataque * 1.15);
+    std::cout << "El " << this->nombre << " (Fase 2) usa daño en area!" << std::endl;
     objetivo->recibirDano(danoEspecial);
 }
 
 void GuardianDeLumen::ataqueFuerte(Player* objetivo) {
     int danoFuerte = static_cast<int>(this->ataque * 1.2);
-    std::cout << " El " << this->nombre << "(Fase 3) usa golpe fuerte!!!"<<std::endl;
+    std::cout << " El " << this->nombre << " (Fase 3) usa golpe fuerte!!!"<<std::endl;
     objetivo->recibirDano(danoFuerte);
 }
-
-

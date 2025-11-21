@@ -1,7 +1,3 @@
-//
-// Created by Usuario on 17/11/2025.
-//
-
 #ifndef CLASE18POO_SALAB1_H
 #define CLASE18POO_SALAB1_H
 

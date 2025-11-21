@@ -1,7 +1,3 @@
-//
-// Created by ssanc on 17/11/2025.
-//
-
 #ifndef CLASE18POO_NPC_H
 #define CLASE18POO_NPC_H
 #include <string>
@@ -17,7 +13,6 @@ public:
     NPC(const std::string& nombre,const std::string& dialogoInicial);
 
     //Implementacion de herencia
-
     /*Se implementa la funcion recibirDano de personaje
      *Ya que los NPcs del juego son invulnerables
      */
@@ -29,6 +24,5 @@ public:
      */
     virtual void interactuar(Player* jugador)  = 0 ;
 };
-
 
 #endif //CLASE18POO_NPC_H

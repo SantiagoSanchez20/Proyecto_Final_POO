@@ -1,7 +1,3 @@
-//
-// Created by ssanc on 16/11/2025.
-//
-
 #ifndef CLASE18POO_GUARDIANDELUMEN_H
 #define CLASE18POO_GUARDIANDELUMEN_H
 #include "Enemigo.h"
@@ -12,8 +8,7 @@ class GuardianDeLumen : public Enemigo{
 private:
     int fase;
     int hpMax;
-//dasdaddd
-//Creamos clases privadas para que no haya ningun problema al momento de confusion al hacer
+    //Creamos clases privadas para que no haya ningun problema al momento de confusion al hacer
 //llamado de las funciones de las fases, dependiendo la vida que tiene el jefe
     void cambiarFase();
 
@@ -33,10 +28,6 @@ private:
 
 
     virtual void recibirDano(int cantidad) override;
-
-
-
-
 };
 
 

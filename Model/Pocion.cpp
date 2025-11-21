@@ -6,8 +6,6 @@
 
 
 #include "Player.h"
-
-
 // --- Constructor ---
 Pocion::Pocion(const std::string& nombre, const std::string& descripcion, int hpCurado)
     // 1. Llama al constructor de Item
@@ -18,8 +16,6 @@ Pocion::Pocion(const std::string& nombre, const std::string& descripcion, int hp
     // Constructor
 }
 //--------Void de usar de la pocion---------
-
-
 void::Pocion::usar(Player* jugador)// Se llama la clase de player para que se aplique la funcion de la pocion
 {
     std::cout << "Bebes la " << this->nombre << "." << std::endl;

@@ -1,6 +1,3 @@
-//
-// Created by ssanc on 17/11/2025.
-//
 
 #ifndef CLASE18POO_SOLDADOCORRUPTO_H
 #define CLASE18POO_SOLDADOCORRUPTO_H
@@ -11,6 +8,4 @@ public:
     SoldadoCorrupto();
 
 };
-
-
 #endif //CLASE18POO_SOLDADOCORRUPTO_H

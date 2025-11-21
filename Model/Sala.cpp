@@ -1,7 +1,11 @@
 #include "Sala.h"
+// --- SOLUCIÓN: Agregamos el include para la definición completa de GameManager
+#include "../Controller/GameManager.h"
+// --------------------------------------------------------------------------
 #include "Player.h"
 #include "Inventario.h"
-
+#include <limits>
+#include <cctype>
 
 void Sala::manejarTurno(GameManager* game, Player* jugador) {
 
@@ -32,10 +36,11 @@ void Sala::manejarTurno(GameManager* game, Player* jugador) {
     }
     else if (eleccion == opcionInventario) {
         jugador->inventario->mostrar();
-        std::cout << "(Presiona Enter para continuar...)" << std::endl;
-        std::cin.get(); // Pausa
+        std::cout << "(Presiona Enter para continuar...)";
+        std::cin.get();
     }
     else if (eleccion == opcionSalir) {
+        // CORREGIDO: Ahora el compilador conoce terminarJuego()
         game->terminarJuego(false);
     }
     else {
@@ -55,7 +60,6 @@ char Sala::presentarOpcionesYLeerInput(const std::vector<std::string>& opciones)
     char eleccion;
     std::cin >> eleccion;
 
-    // Limpiar el buffer de cin para futuras lecturas (ej. std::getline)
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
     return std::tolower(eleccion);

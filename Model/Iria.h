@@ -1,7 +1,3 @@
-//
-// Created by ssanc on 17/11/2025.
-//
-
 #ifndef CLASE18POO_IRIA_H
 #define CLASE18POO_IRIA_H
 #include "NPC.h"
@@ -16,9 +12,5 @@ public:
 
     void darBuff(Player *jugador);
     void darPistaLlave();
-
-
 };
-
-
 #endif //CLASE18POO_IRIA_H

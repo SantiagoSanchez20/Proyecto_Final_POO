@@ -1,7 +1,3 @@
-//
-// Created by duque on 10/11/2025.
-//
-
 #ifndef CLASE18POO_ESPADABRUMA_H
 #define CLASE18POO_ESPADABRUMA_H
 #include "Arma.h"

@@ -1,7 +1,3 @@
-//
-// Created by ssanc on 17/11/2025.
-//
-
 #ifndef CLASE18POO_MAELOR_H
 #define CLASE18POO_MAELOR_H
 #include "NPC.h"
@@ -25,11 +21,5 @@ class Maelor : public NPC{
     //Implementacion para dar la cura al jugador en el caso de que adivine
 
     void darPocion(Player* jugador);
-
-
-
-
 };
-
-
 #endif //CLASE18POO_MAELOR_H
