@@ -46,3 +46,15 @@ void Inventario::mostrar() {
 
     std::cout << "=====================" << std::endl;
 }
+
+int Inventario::getCantidad() const {
+    return this->items.size();
+}
+
+Item* Inventario::obtenerItem(int indice) {
+    // Verificamos que el índice sea válido (que no sea menor a 0 ni mayor al tamaño)
+    if (indice >= 0 && indice < this->items.size()) {
+        return this->items[indice];
+    }
+    return nullptr; // Si piden un número inválido, devolvemos "nada"
+}

@@ -3,22 +3,15 @@
 #include "NPC.h"
 
 class Maelor : public NPC{
-    public:
-    //Constructor
+public:
     Maelor();
-    //Destructor
     ~Maelor();
 
-    //Implementacion virtual para la interaccion con el jugador:
     virtual void interactuar(Player *jugador) override;
-
-    // Implementacion para dar el consejo tactico o consejo ayuda
     void darConsejo();
 
-    //Implementacion del dialogo de adivinanza para dar la respectiva recompensa de una pocion.
-    void iniciarAdivinanza(Player* jugador);
-
-    //Implementacion para dar la cura al jugador en el caso de que adivine
+    // CAMBIO IMPORTANTE: Ahora devuelve bool (true si acierta, false si falla)
+    bool iniciarAdivinanza(Player* jugador);
 
     void darPocion(Player* jugador);
 };

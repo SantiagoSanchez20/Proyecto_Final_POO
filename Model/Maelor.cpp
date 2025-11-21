@@ -1,52 +1,57 @@
 #include "Maelor.h"
 #include <iostream>
+#include <limits> // Para limpiar el buffer
 #include "Player.h"
 #include "Pocion.h"
 
 Maelor::Maelor()
-    :NPC("Maelor", "Saludos extraño...."
-                   "si estas aqui es por que andas en busca de la fruta Aureus, pero todos conoces su verdadero "
-                   "efecto..... podria matarte o incluso darte vida eterna."){
+    :NPC("Maelor", "Saludos extraño... si estas aqui es por que andas en busca de la fruta Aureus."){
+}
 
-}
-Maelor::~Maelor() {
-    // Definición vacía es suficiente
-}
+Maelor::~Maelor() {}
 
 void Maelor::interactuar(Player *jugador) {
-    std::cout <<"[Maelor] " << this->dialogo << std::endl;
-
+    std::cout << "[Maelor] " << this->dialogo << std::endl;
     this->darConsejo();
-    this->iniciarAdivinanza(jugador);
+    // No llamamos a iniciarAdivinanza aquí directamente porque SalaB1 controla cuándo pasa eso.
 }
+
 void Maelor::darConsejo() {
-    std::cout << "[Maelor] Consejo: Escucha, forastero. Los guardianes pesados son lentos y predecibles, pero resistentes.Usa tu agilidad para evadirlos y atacar cuando estén vulnerables."<< std::endl;
+    std::cout << "[Maelor] Consejo: Los guardianes pesados son lentos. Usa tu agilidad."<< std::endl;
 }
 
-void Maelor::iniciarAdivinanza(Player* jugador) {
-    std::cout <<"[Maelor] En esta mazmorra es peligrosa te hara falta tener pociones de vida, si me respondes a mi adivinanza, te dare algo para el camino"<<std::endl;
-    std::cout <<"[Maelor] Adivinanza: Sube y baja sin moverse?"<< std::endl;
+// AHORA DEVUELVE BOOL Y PIDE INPUT
+bool Maelor::iniciarAdivinanza(Player* jugador) {
+    std::cout << "\n[Maelor] Adivinanza: Sube y baja sin moverse?" << std::endl;
+    std::cout << "1. Una pluma" << std::endl;
+    std::cout << "2. Una escalera" << std::endl; // Respuesta correcta (Escalera eléctrica/normal)
+    std::cout << "3. El viento" << std::endl;
+    std::cout << "> Elige una opcion (1-3): ";
 
-    // Nota: Aquí se necesita implementación de lectura de input para la adivinanza.
-    bool respuestaCorrecta = true; // Hardcodeado por ahora
+    int opcion;
+    std::cin >> opcion;
 
-    if (respuestaCorrecta){
-        std::cout << "[Maelor]   'Escalera electrica'..... Correcto!!!."<<std::endl;
+    // Limpieza básica del buffer para evitar errores si meten letras
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+    if (opcion == 2) {
+        std::cout << "[Maelor] 'Una escalera'... Correcto!!!" << std::endl;
         this->darPocion(jugador);
+        return true; // ¡Ganó!
     } else {
-        std::cout <<"[Maelor] No...... Extrano. Vuelve a intentarlo, te has equivocado!!"<< std::endl;
+        std::cout << "[Maelor] No... Incorrecto. Medita y vuelve a intentarlo." << std::endl;
+        return false; // Falló
     }
 }
+
 void Maelor::darPocion(Player* jugador) {
-    std::cout <<"[Maelor] Tu respuesta es recompensada. Toma esta pocion de vida." << std::endl;
-
+    std::cout << "[Maelor] Toma esta pocion de vida." << std::endl;
     Pocion* pocionCurativa = new Pocion("Pocion de Maelor","Una pocion que cura 15 HP",15);
-    bool exito = jugador->inventario->agregarItem(pocionCurativa);
 
-    if (exito) {
-        std::cout <<"[Juego] Has recibido [Pocion de Maelor] en tu inventario." << std::endl;
+    if (jugador->inventario->agregarItem(pocionCurativa)) {
+        std::cout << "[Juego] Has recibido [Pocion de Maelor]." << std::endl;
     } else {
-        std::cout << "[Juego] Tu inventario esta lleno." << std::endl;
+        std::cout << "[Juego] Tu inventario esta lleno. La pocion se pierde." << std::endl;
         delete pocionCurativa;
     }
 }

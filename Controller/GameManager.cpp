@@ -3,7 +3,7 @@
 
 #include "../View/Consola.h"
 
-
+#include "../Model/Arma.h"
 #include "../Model/Sala.h"
 #include "../Model/SalaInicio.h"
 #include "../Model/SalaB1.h"
@@ -120,7 +120,9 @@ void GameManager::buclePrincipal() {
 }
 
 void GameManager::mostrarInfoSala() {
+
     std::cout << "\n--- " << salaActual->nombre << " ---" << std::endl;
+      std::cout << "Descripcion en la sala: " << std::endl;
 
     // Mostrar Personajes
     if (!salaActual->personajesEnSala.empty()) {
@@ -164,59 +166,67 @@ void GameManager::terminarJuego(bool victoria) {
 
 
 void GameManager::iniciarCombate(Player* jugador, Enemigo* enemigo, bool jugadorAtacaPrimero) {
+
+    // Si no, usa tu cout manual:
     std::cout << "\n\n========= INICIO DE COMBATE ==========" << std::endl;
     std::cout << "¡Te enfrentas a: " << enemigo->getNombre() << " (HP: " << enemigo->getHp() << ")!" << std::endl;
 
     bool enCombate = true;
     bool turnoJugador = jugadorAtacaPrimero;
 
-    // Chequeo especial para el Jefe (para las fases)
-    GuardianDeLumen* jefe = dynamic_cast<GuardianDeLumen*>(enemigo);
-    int hpMaxJefe = 0;
-    if (jefe) hpMaxJefe = jefe->getHp();
-
     while (enCombate) {
         // Chequeo de Muerte
         if (enemigo->getHp() <= 0 || jugador->getHp() <= 0) break;
 
-        // 1. Actualizar buffs
-        jugador->actualizarBuff();
+        // 1. Actualizar buffs (IMPORTANTE: Solo una vez por ronda, aquí lo haces en cada turno, está bien)
+        jugador->actualizarBuff(); // Ojo: Revisa si tu función se llama actualizarBuff o actualizarBuffs
 
         // --- Turnos ---
         if (turnoJugador) {
             // TURNO JUGADOR
             std::cout << "\n--- Tu Turno (HP: " << jugador->getHp() << ") ---" << std::endl;
-            std::cout << "A. Atacar | B. Usar Item" << std::endl;
+            std::cout << "1. Atacar" << std::endl;
+            std::cout << "2. Usar Item" << std::endl;
             std::cout << "> ";
 
-            char opcion;
+            int opcion;
             std::cin >> opcion;
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            opcion = std::tolower(opcion);
 
-            if (opcion == 'a') {
+            if (opcion == 1) {
                 jugador->atacar(enemigo);
-            } else if (opcion == 'b') {
-                std::cout << "Nombre del item a usar: ";
-                std::string nombreItem;
-                std::getline(std::cin, nombreItem);
+            }
+            else if (opcion == 2) {
+                // --- AQUÍ ESTÁ EL CAMBIO CLAVE ---
 
-                Item* item = jugador->inventario->buscarItem(nombreItem);
+                // 1. Llamamos al menú de la consola
+                int indice = Consola::seleccionarItemInventario(*jugador->inventario);
 
-                if (item && dynamic_cast<Pocion*>(item)) {
-                    item->usar(jugador);
-                    jugador->inventario->removerItem(item);
+                // 2. Verificamos si eligió algo válido (-1 es cancelar)
+                if (indice != -1) {
+                    Item* item = jugador->inventario->obtenerItem(indice);
+
+                    if (item) {
+                        jugador->usarItem(item);
+
+                        // 3. Si es un consumible (no es arma), lo borramos
+                        // Necesitas #include "../Model/Arma.h" para esto
+                        if (dynamic_cast<Arma*>(item) == nullptr) {
+                            jugador->inventario->removerItem(item);
+                        }
+                    }
                 } else {
-                    std::cout << "No tienes ese item o no se puede usar en combate." << std::endl;
+                    // Si canceló, reiniciamos el bucle para que no pierda el turno
+                    std::cout << "Volviendo al menu de combate..." << std::endl;
                     continue;
                 }
             } else {
                 std::cout << "Opcion invalida." << std::endl;
-                continue;
+                continue; // Volver a preguntar
             }
         } else {
             // TURNO ENEMIGO
-            std::cout << "\n--- Turno de " << enemigo->getNombre() << " (HP: " << enemigo->getHp() << ") ---" << std::endl;
+            std::cout << "\n--- Turno de " << enemigo->getNombre() << " ---" << std::endl;
             enemigo->atacar(jugador);
         }
 
@@ -224,11 +234,11 @@ void GameManager::iniciarCombate(Player* jugador, Enemigo* enemigo, bool jugador
         if (enemigo->getHp() <= 0) {
             std::cout << "\n¡Has vencido a " << enemigo->getNombre() << "!" << std::endl;
 
-            // Evento especial: Iria aparece si matas al Ladron
+            // Lógica especial de Iria/Ladron
             if (dynamic_cast<Ladron*>(enemigo)) {
                 SalaC2* salaC2 = dynamic_cast<SalaC2*>(salaActual);
                 if (salaC2 && !salaC2->iriaYaAparecio) {
-                    std::cout << "Al derrotar al ladrón, un fantasma emerge del cuerpo..." << std::endl;
+                    std::cout << "Al derrotar al ladrón, un fantasma emerge..." << std::endl;
                     Iria* iria = new Iria();
                     salaActual->personajesEnSala.push_back(iria);
                     iria->interactuar(jugador);
@@ -236,7 +246,11 @@ void GameManager::iniciarCombate(Player* jugador, Enemigo* enemigo, bool jugador
                     salaC2->ladronVencido = true;
                 }
             }
-            removePersonaje(enemigo->getNombre(), salaActual);
+
+            // NO borres al enemigo aquí si quieres saquearlo después en SalaB2 (Guardia Pesado)
+            // Pero para Maelor/Soldados está bien borrarlo.
+            // removePersonaje(enemigo->getNombre(), salaActual);
+
             enCombate = false;
         }
         else if (jugador->getHp() <= 0) {

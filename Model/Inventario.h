@@ -21,6 +21,10 @@ public:
 
     // Función que llama SalaC1
     void mostrar();
+
+
+    int getCantidad() const;         // Para saber cuántos items hay
+    Item* obtenerItem(int indice);   // Para obtener el item "1", "2", etc.
 };
 
 #endif // INVENTARIO_H

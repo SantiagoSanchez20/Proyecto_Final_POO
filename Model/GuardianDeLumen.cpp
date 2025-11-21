@@ -5,10 +5,9 @@
 
 // --- Constructor ---
 // Ajustamos la vida (HP) a 200 para que sea un jefe apropiado.
-GuardianDeLumen::GuardianDeLumen() : Enemigo("Guardian de Lumen", 200, 12, 10),
+GuardianDeLumen::GuardianDeLumen() : Enemigo("Guardian de Lumen", 100, 12, 10),
 fase(1), hpMax(200)  {
-    std::cout << " El "<<this->nombre << " ha aparecido..... ¡Derrotalo! " << std::endl;
-}
+    }
 
 // --- Destructor
 GuardianDeLumen::~GuardianDeLumen() {
